@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="onFindNewsClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="favoritesTCount"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_favorites"
+            style="@style/Text_600.SP18.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_22"
+            android:text="@string/favorites_tab"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_favorites_count"
+            style="@style/Text_600.SP18.Gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            app:layout_constraintBottom_toBottomOf="@id/tv_favorites"
+            app:layout_constraintStart_toEndOf="@id/tv_favorites"
+            app:layout_constraintTop_toTopOf="@id/tv_favorites"
+            android:text="@{favoritesTCount}"
+            tools:text="24" />
+
+        <View
+            android:id="@+id/v_separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin_20"
+            android:background="@color/color_separator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_favorites" />
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv_favorites"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_separator"
+            tools:listitem="@layout/holder_news_big"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_no_news"
+            style="@style/Text_500.SP16.Gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_saved_news"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_separator" />
+
+        <TextView
+            android:id="@+id/btn_find_news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_50"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:background="@drawable/ripple_pink"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_500"
+            android:onClick="@{onFindNewsClick}"
+            android:paddingTop="@dimen/margin_14"
+            android:paddingBottom="@dimen/margin_14"
+            android:text="@string/find_news"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_18"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_no_news"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

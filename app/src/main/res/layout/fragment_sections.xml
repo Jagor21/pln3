@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="onProceedButtonClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="isSectionStart"
+            type="Boolean" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingTop="@dimen/margin_14"
+            android:paddingBottom="@dimen/margin_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tb_news_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/poppins_700"
+                        android:gravity="center_vertical"
+                        android:text="@{isSectionStart ? @string/sections_title : @string/sections}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_24"
+                        tools:text="fjfjfjf"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/poppins_500"
+                        android:gravity="center_vertical"
+                        android:text="@{isSectionStart ? @string/sections_description : @string/breaking_news_desc}"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_16"
+                        app:layout_constraintStart_toStartOf="@id/tv_title"
+                        app:layout_constraintTop_toBottomOf="@id/tv_title"
+                        app:layout_constraintEnd_toEndOf="@id/tv_title"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/tv_title"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/margin_8"
+                        android:layout_marginEnd="@dimen/margin_16"
+                        app:layout_constraintHorizontal_bias="1"
+                        android:src="@drawable/ic_app_logo"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_desc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_title"
+                        app:layout_goneMarginStart="@dimen/margin_8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rv_sections"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/proceed_btn_container"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:paddingStart="@dimen/margin_20"
+                android:paddingEnd="@dimen/margin_20"
+                tools:listitem="@layout/holder_section_category" />
+
+            <LinearLayout
+                android:id="@+id/proceed_btn_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/margin_10"
+                android:paddingStart="@dimen/margin_24"
+                android:paddingTop="@dimen/margin_16"
+                android:paddingEnd="@dimen/margin_24"
+                android:paddingBottom="@dimen/margin_16"
+                android:visibility="@{isSectionStart ? View.VISIBLE : View.GONE}">
+
+                <TextView
+                    android:id="@+id/btn_proceed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_pink"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/poppins_500"
+                    android:onClick="@{onProceedButtonClick}"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/proceed"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_18" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

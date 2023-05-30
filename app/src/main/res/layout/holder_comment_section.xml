@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="onCommentsClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onCommentLike"
+            type="View.OnClickListener" />
+
+        <variable
+            name="isCommentVisible"
+            type="Boolean" />
+
+        <variable
+            name="onLeaveCommentClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="comment"
+            type="com.info_turrim.polandnews.news_feed.domain.model.Comment" />
+
+        <variable
+            name="commentCount"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_comments"
+            style="@style/Text_500.SP18.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_24"
+            android:onClick="@{onCommentsClick}"
+            android:text="@string/comments"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_comments_amount"
+            style="@style/Text_500.SP18.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/margin_14"
+            android:onClick="@{onCommentsClick}"
+            android:text="@{commentCount}"
+            app:drawableEndCompat="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/tv_comments"
+            app:layout_constraintStart_toEndOf="@id/tv_comments"
+            app:layout_constraintTop_toTopOf="@id/tv_comments"
+            tools:text="(256)" />
+
+        <LinearLayout
+            android:id="@+id/comment_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/btn_leave_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_comments">
+
+            <include
+                android:id="@+id/comment_container"
+                layout="@layout/holder_news_comment"
+                app:comment="@{comment}"
+                app:onCommentLike="@{onCommentLike}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{isCommentVisible ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toTopOf="@id/btn_leave_comment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_comments"
+                tools:visibility="gone" />
+
+            <TextView
+                android:id="@+id/no_comments_message"
+                style="@style/Text_600.SP18.Gray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24"
+                android:layout_marginBottom="@dimen/margin_24"
+                android:text="@string/there_are_no_comments"
+                android:textAlignment="center"
+                android:visibility="@{isCommentVisible ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toTopOf="@id/btn_leave_comment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_comments"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_leave_comment"
+            style="@style/Text_500.SP18.White"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:background="@drawable/ripple_pink"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{onLeaveCommentClick}"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:text="@string/leave_a_comment"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comment_section" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_graph"
+    app:startDestination="@id/start_auth_fragment">
+
+<!--    <include app:graph="@navigation/news_graph" />-->
+<!--    <include app:graph="@navigation/sections_graph" />-->
+
+    <fragment
+        android:id="@+id/profile_fragment"
+        android:name="com.info_turrim.polandnews.profile.ui.fragment.ProfileFragment"
+        android:label="ProfileFragment">
+        <action
+            android:id="@+id/action_profileFragment_to_hideSectionBottomSheetDialogFragment"
+            app:destination="@id/hide_section_bottom_sheet_dialog_fragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_optionsFragment"
+            app:destination="@id/options_fragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_newsGraph"
+            app:destination="@id/news_graph" />
+        <action
+            android:id="@+id/action_profileFragment_to_commentsFragment"
+            app:destination="@id/favourites_news_comments_fragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_sourceFragment"
+            app:destination="@id/favourites_source_fragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_sectionDetailsFragment"
+            app:destination="@id/favourites_section_details_fragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_sectionsGraph"
+            app:destination="@id/sections_graph" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favourites_section_details_fragment"
+        android:name="com.info_turrim.polandnews.sections.ui.fragment.SectionDetailsFragment"
+        android:label="FavouritesSectionDetailsFragment">
+        <argument
+            android:name="category"
+            app:argType="com.info_turrim.polandnews.common.model_domain.Category" />
+        <argument
+            android:name="sectionName"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <action android:id="@+id/action_sectionDetailsFragment_to_newsDetailsFragment"
+            app:destination="@id/favourites_news_details_fragment"/>
+
+        <action android:id="@+id/action_sectionNewsDetailsFragment_to_newsCommentsFragment"
+            app:destination="@id/favourites_news_comments_fragment"/>
+
+        <action android:id="@+id/action_sectionDetailsFragment_to_sourceFragment"
+            app:destination="@id/favourites_section_source_fragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/favourites_section_source_fragment"
+        android:name="com.info_turrim.polandnews.source.ui.fragment.SourceFragment"
+        android:label="FavouritesSourceFragment">
+
+        <argument
+            android:name="sourceId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_sourceFragment_to_newsDetailsFragment"
+            app:destination="@id/favourites_news_details_fragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/favourites_news_details_fragment"
+        android:name="com.info_turrim.polandnews.news_feed.ui.fragment.NewsDetailsFragment"
+        android:label="FavouritesNewsDetailsFragment"
+        app:popUpTo="@id/news_feed_section_fragment"
+        app:popUpToInclusive="true">
+
+        <argument
+            android:name="newsId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+
+        <argument
+            android:name="filterType"
+            android:defaultValue="for-you"
+            app:argType="string" />
+
+        <argument
+            android:name="sourceId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_newsDetailsFragment_to_newsCommentsFragment"
+            app:destination="@id/favourites_news_comments_fragment" />
+
+        <action
+            android:id="@+id/action_newsDetailsFragment_to_leaveCommentFragment"
+            app:destination="@id/favourites_leave_comment_fragment" />
+
+        <action
+            android:id="@+id/action_newsDetailsFragment_to_newsDetailsFragment"
+            app:destination="@id/favourites_news_details_fragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/favourites_news_comments_fragment"
+        android:name="com.info_turrim.polandnews.news_feed.ui.fragment.NewsCommentsFragment"
+        android:label="NewsCommentsFragment">
+        <argument
+            android:name="newsId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <argument
+            android:name="commentsAmount"
+            android:defaultValue="0"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_newsCommentsFragment_to_leaveCommentFragment"
+            app:destination="@id/favourites_leave_comment_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favourites_leave_comment_fragment"
+        android:name="com.info_turrim.polandnews.news_feed.ui.fragment.LeaveCommentFragment"
+        android:label="FavouritesLeaveCommentFragment">
+        <argument
+            android:name="newsId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/auth_fragment"
+        android:name="com.info_turrim.polandnews.profile.ui.fragment.AuthFragment"
+        android:label="AuthFragment">
+        <argument
+            android:name="isSignIn"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
+        <action
+            android:id="@+id/action_authFragment_to_newsGraph"
+            app:destination="@id/news_graph" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/start_auth_fragment"
+        android:name="com.info_turrim.polandnews.profile.ui.fragment.StartAuthFragment"
+        android:label="StartAuthFragment" />
+
+    <fragment
+        android:id="@+id/options_fragment"
+        android:name="com.info_turrim.polandnews.options.ui.fragment.OptionsFragment"
+        android:label="OptionsFragment">
+
+        <action
+            android:id="@+id/action_optionsFragment_to_editProfileFragment"
+            app:destination="@id/edit_profile_fragment" />
+
+        <action
+            android:id="@+id/action_optionsFragment_to_writeSupportFragment"
+            app:destination="@id/write_to_support_fragment" />
+
+        <action
+            android:id="@+id/action_optionsFragment_to_optionsDocFragment"
+            app:destination="@id/options_doc_fragment" />
+
+        <action
+            android:id="@+id/action_optionsFragment_to_aboutFragment"
+            app:destination="@id/about_fragment" />
+
+        <action
+            android:id="@+id/action_optionsFragment_to_newsGraph"
+            app:destination="@id/news_graph" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/edit_profile_fragment"
+        android:name="com.info_turrim.polandnews.options.ui.fragment.EditProfileFragment"
+        android:label="EditProfileFragment">
+
+        <argument
+            android:name="userName"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <argument
+            android:name="userEmail"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/write_to_support_fragment"
+        android:name="com.info_turrim.polandnews.options.ui.fragment.WriteToSupportFragment"
+        android:label="WriteToSupportFragment" />
+
+    <fragment
+        android:id="@+id/options_doc_fragment"
+        android:name="com.info_turrim.polandnews.options.ui.fragment.OptionsDocFragment"
+        android:label="OptionsDocFragment">
+
+        <argument
+            android:name="isPolicy"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/about_fragment"
+        android:name="com.info_turrim.polandnews.options.ui.fragment.AboutFragment"
+        android:label="AboutFragment" />
+
+    <dialog
+        android:id="@+id/hide_section_bottom_sheet_dialog_fragment"
+        android:name="com.info_turrim.polandnews.profile.ui.fragment.HideSectionBottomSheetDialogFragment"
+        android:label="HideSectionBottomSheetDialogFragment">
+
+        <argument
+            android:name="categoryId"
+            app:argType="integer" />
+    </dialog>
+    <fragment
+        android:id="@+id/favourites_source_fragment"
+        android:name="com.info_turrim.polandnews.source.ui.fragment.SourceFragment"
+        android:label="FavouritesSourceFragment">
+
+        <argument
+            android:name="sourceId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_sourceFragment_to_newsDetailsFragment"
+            app:destination="@id/favourites_news_details_fragment" />
+
+    </fragment>
+
+</navigation>

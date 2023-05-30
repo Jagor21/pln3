@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/follow_graph"
+    app:startDestination="@id/follow_fragment">
+
+    <include app:graph="@navigation/sections_graph" />
+
+    <fragment
+        android:id="@+id/follow_fragment"
+        android:name="com.info_turrim.polandnews.follow.ui.fragment.FollowFragment"
+        android:label="FollowFragment">
+
+        <action
+            android:id="@+id/action_followFragment_to_sectionsGraph"
+            app:destination="@id/sections_graph" />
+    </fragment>
+</navigation>

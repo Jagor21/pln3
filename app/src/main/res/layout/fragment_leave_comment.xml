@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="onLeaveCommentClick"
+            type="View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_leave_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/elevation_4"
+            android:paddingTop="@dimen/margin_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_navigation_back_gray"
+            app:title="@string/leave_your_comment"
+            app:titleTextAppearance="@style/Text_700.SP26.Black"
+            app:titleTextColor="@color/black" />
+
+        <EditText
+            android:id="@+id/et_comment"
+            style="@style/Text_400.SP16.Black"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_14"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:background="@drawable/bg_auth_et"
+            android:gravity="top|start"
+            android:maxLines="10"
+            android:minLines="10"
+            android:paddingStart="@dimen/margin_16"
+            android:paddingTop="@dimen/margin_12"
+            android:paddingEnd="@dimen/margin_12"
+            android:paddingBottom="@dimen/margin_20"
+            android:scrollbars="vertical"
+            android:textAlignment="gravity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_leave_comment"
+            tools:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem" />
+
+        <TextView
+            android:id="@+id/btn_leave_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:background="@drawable/ripple_pink"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_500"
+            android:onClick="@{onLeaveCommentClick}"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:text="@string/leave_my_comment"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_18"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_comment" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

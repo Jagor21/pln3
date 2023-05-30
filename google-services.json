@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "933303629887",
+    "project_id": "poland-news-9afc2",
+    "storage_bucket": "poland-news-9afc2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933303629887:android:5122d5ab8c01fd6037608a",
+        "android_client_info": {
+          "package_name": "com.info_turrim.polandnews"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2l_LptOMmmH3yTQ3O01eNUxUSkFEmrbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

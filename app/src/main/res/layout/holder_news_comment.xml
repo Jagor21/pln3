@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.info_turrim.polandnews.utils.extension.StringExtKt" />
+
+        <import type="com.info_turrim.polandnews.utils.extension.DateTimeExtKt" />
+
+        <variable
+            name="comment"
+            type="com.info_turrim.polandnews.news_feed.domain.model.Comment" />
+
+        <variable
+            name="onCommentLike"
+            type="View.OnClickListener" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/margin_24"
+            android:paddingEnd="@dimen/margin_24"
+            android:paddingBottom="@dimen/margin_10">
+
+            <ImageView
+                android:id="@+id/iv_author_photo"
+                commentAuthorImage="@{comment.author.photo == null ? StringExtKt.EMPTY_STRING: comment.author.photo}"
+                android:layout_width="@dimen/margin_45"
+                android:layout_height="@dimen/margin_45"
+                android:layout_gravity="top"
+                android:layout_marginTop="@dimen/margin_8"
+                tools:srcCompat="@drawable/comment_avatar_placeholder" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_14"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        style="@style/Text_500.SP16.Black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{comment.author.username}"
+                        tools:text="Username" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_6"
+                        android:fontFamily="@font/poppins_500"
+                        android:text="·"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/tv_published_at"
+                        style="@style/Text_500.SP14.Gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_6"
+                        android:text="@{DateTimeExtKt.createTimeForComment(comment.createdAt.toString())}"
+                        tools:text="2 house ago" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/Text_400.SP16.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_14"
+                    android:text="@{comment.text}"
+                    tools:text="He also said thank you to the volunteers assisting in the world record registration." />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_14"
+                    android:layout_marginTop="@dimen/margin_14"
+                    android:background="@{comment.likedByUser == true ? @drawable/bg_liked_comment : @drawable/bg_like_comment}"
+                    android:onClick="@{onCommentLike}"
+                    android:paddingStart="@dimen/margin_14"
+                    android:paddingTop="@dimen/margin_10"
+                    android:paddingEnd="@dimen/margin_24"
+                    android:paddingBottom="@dimen/margin_10">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@{comment.likedByUser == true ? @drawable/ic_like_white : @drawable/ic_like}" />
+
+                    <TextView
+                        style="@style/Text_600.SP16.Gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:text="@{Integer.toString(comment.liked)}"
+                        android:textColor="@{comment.likedByUser == true ? @color/white : @color/gray}"
+                        tools:text="26" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/color_separator" />
+    </LinearLayout>
+</layout>

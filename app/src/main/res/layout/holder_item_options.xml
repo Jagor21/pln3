@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="onOptionClick"
+            type="View.OnClickListener" />
+        <variable
+            name="optionIcon"
+            type="Integer" />
+
+        <variable
+            name="optionText"
+            type="String" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{onOptionClick}">
+
+        <TextView
+            style="@style/Text_500.SP18.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:drawablePadding="@dimen/margin_14"
+            android:text="@{optionText}"
+            app:drawableStartCompat="@{optionIcon}"
+            tools:drawableStartCompat="@drawable/ic_option_about"
+            tools:text="@string/edit_profile"
+            app:drawableEndCompat="@drawable/ic_arrow_right" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="@color/color_separator" />
+    </FrameLayout>
+</layout>

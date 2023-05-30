@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="onAddSectionClick"
+            type="View.OnClickListener" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/margin_24"
+        android:paddingEnd="@dimen/margin_24">
+
+        <TextView
+            android:id="@+id/btn_email_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@drawable/ripple_pink"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_500"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:onClick="@{onAddSectionClick}"
+            android:text="@string/add_section"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_18" />
+
+    </FrameLayout>
+</layout>

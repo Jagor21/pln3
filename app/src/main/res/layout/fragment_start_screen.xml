@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="onGoogleSignUpClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onEmailSignUpClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onLogInClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onSkipClick"
+            type="View.OnClickListener" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:paddingStart="@dimen/margin_16"
+            android:paddingEnd="@dimen/margin_16">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_app_logo" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_30"
+                android:fontFamily="@font/poppins_700"
+                android:text="@string/breaking_news"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_26"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_7"
+                android:fontFamily="@font/poppins_500"
+                android:text="@string/splash_description"
+                android:textAlignment="center"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+            <TextView
+                android:id="@+id/tv_sign_in_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_50"
+                android:fontFamily="@font/poppins_500"
+                android:text="@string/create_account"
+                android:textAlignment="center"
+                android:textColor="#9A9A9A"
+                android:textSize="@dimen/text_18"
+                app:layout_constraintBottom_toTopOf="@id/btn_email_sign_up"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+            <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--            android:id="@+id/sign_up_google_container"-->
+            <!--            android:layout_width="0dp"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginTop="@dimen/margin_24"-->
+            <!--            android:background="@drawable/ripple_white"-->
+            <!--            android:clickable="true"-->
+            <!--            android:onClick="@{onGoogleSignUpClick}"-->
+            <!--            android:focusable="true"-->
+            <!--            android:orientation="horizontal"-->
+            <!--            app:layout_constraintBottom_toTopOf="@id/btn_email_sign_up"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toBottomOf="@id/tv_sign_in_description">-->
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/iv_google"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/margin_50"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:srcCompat="@drawable/ic_google_sign_in" />-->
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/tv"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:layout_marginStart="@dimen/margin_24"-->
+            <!--                android:fontFamily="@font/poppins_500"-->
+            <!--                android:paddingTop="@dimen/margin_14"-->
+            <!--                android:paddingBottom="@dimen/margin_14"-->
+            <!--                android:text="@string/sing_up_with_google"-->
+            <!--                android:textColor="#9A9A9A"-->
+            <!--                android:textSize="@dimen/text_18"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintHorizontal_bias="0.0"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/iv_google"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintVertical_bias="0.0" />-->
+            <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+            <TextView
+                android:id="@+id/btn_email_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24"
+                android:background="@drawable/ripple_pink"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_500"
+                android:onClick="@{onEmailSignUpClick}"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/sing_up_with_email"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_18"
+                app:layout_constraintBottom_toTopOf="@id/btn_log_in"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sign_in_description" />
+
+            <TextView
+                android:id="@+id/btn_log_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/ripple_gray"
+                android:clickable="true"
+                android:drawablePadding="@dimen/margin_24"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_500"
+                android:onClick="@{onLogInClick}"
+                android:paddingStart="@dimen/margin_60"
+                android:paddingTop="@dimen/margin_14"
+                android:paddingEnd="@dimen/margin_60"
+                android:paddingBottom="@dimen/margin_14"
+                android:text="@string/log_in"
+                android:textAlignment="center"
+                android:textColor="#9A9A9A"
+                android:textSize="@dimen/text_18"
+                app:layout_constraintBottom_toTopOf="@id/tv_skip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_email_sign_up" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv_skip"
+                style="@style/BorderlessButtonGray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginBottom="@dimen/margin_50"
+                android:onClick="@{onSkipClick}"
+                android:paddingStart="@dimen/margin_60"
+                android:paddingTop="@dimen/margin_14"
+                android:paddingEnd="@dimen/margin_60"
+                android:paddingBottom="@dimen/margin_14"
+                android:text="@string/skip_for_now"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_log_in" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

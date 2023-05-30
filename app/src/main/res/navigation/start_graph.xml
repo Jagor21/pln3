@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/start_graph"
+    app:startDestination="@id/splash_screen_fragment">
+
+    <include app:graph="@navigation/sections_graph"/>
+    <include app:graph="@navigation/profile_graph"/>
+
+    <fragment
+        android:id="@+id/splash_screen_fragment"
+        android:name="com.info_turrim.polandnews.start_screen.ui.fragment.SplashScreenFragment"
+        android:label="SplashScreenFragment">
+        <action
+            android:id="@+id/action_splashScreenFragment_to_startScreenFragment"
+            app:destination="@id/start_screen_fragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_termsFragment"
+            app:destination="@id/terms_fragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_sectionsGraph"
+            app:destination="@id/sections_graph" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_feedFragment"
+            app:destination="@id/news_feed_fragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_newsFeedFragment"
+            app:destination="@id/news_feed_fragment" />
+
+        <action
+            android:id="@+id/action_splashScreenFragment_to_newsGraph"
+            app:destination="@id/news_graph" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/start_screen_fragment"
+        android:name="com.info_turrim.polandnews.start_screen.ui.fragment.StartScreenFragment"
+        android:label="StartScreenFragment">
+        <action
+            android:id="@+id/action_startScreenFragment_to_newsFeedFragment"
+            app:destination="@id/news_feed_fragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_sectionsFragment"
+            app:destination="@id/sections_graph" />
+        <action
+            android:id="@+id/action_startFragment_to_newsGraph"
+            app:destination="@id/news_graph" />
+        <action
+            android:id="@+id/action_startFragment_to_profileGraph"
+            app:destination="@id/profile_graph" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/terms_fragment"
+        android:name="com.info_turrim.polandnews.start_screen.ui.fragment.TermsFragment"
+        android:label="TermsFragment">
+        <action
+            android:id="@+id/action_termsFragment_to_startOptionsDocFragment"
+            app:destination="@id/start_options_doc_fragment" />
+        <action
+            android:id="@+id/action_termsFragment_to_startScreenFragment"
+            app:destination="@id/start_screen_fragment" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/start_options_doc_fragment"
+        android:name="com.info_turrim.polandnews.options.ui.fragment.OptionsDocFragment"
+        android:label="OptionsDocFragment">
+
+        <argument
+            android:name="isPolicy"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </fragment>
+
+</navigation>

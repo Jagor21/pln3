@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="categoryIcon"
+            type="Integer" />
+
+        <variable
+            name="category"
+            type="com.info_turrim.polandnews.common.model_domain.Category" />
+
+        <variable
+            name="onCategoryClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onSubscribeClick"
+            type="View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/parent_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_14"
+        android:layout_marginTop="@dimen/margin_14"
+        android:background="@color/white"
+        android:onClick="@{onCategoryClick}">
+
+        <ImageView
+            android:id="@+id/iv_category"
+            android:layout_width="@dimen/margin_100"
+            android:layout_height="@dimen/margin_100"
+            android:background="@drawable/ic_section_category_bck"
+            android:paddingTop="@dimen/margin_12"
+            android:paddingBottom="@dimen/margin_12"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_section_category_breaking_news" />
+
+
+        <TextView
+            android:id="@+id/tv_category_title"
+            style="@style/Text_600.SP16.Black"
+            android:layout_width="0dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_14"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:maxLines="2"
+            android:text="@{category.title}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/iv_category"
+            app:layout_constraintStart_toStartOf="@id/iv_category"
+            app:layout_constraintTop_toBottomOf="@id/iv_category"
+            tools:text="Poland Poland Poland" />
+
+        <TextView
+            android:id="@+id/tv_category_description"
+            style="@style/Text_500.SP16.Gray"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:visibility="@{category.mSubtitle == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toStartOf="@id/btn_subscribe"
+            app:layout_constraintStart_toStartOf="@id/tv_category_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_category_title"
+            tools:text="All the breaking news from all over the world"
+            tools:visibility="gone" />
+
+        <ToggleButton
+            android:id="@+id/btn_subscribe"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginStart="@dimen/margin_10"
+            android:background="@drawable/category_subscribe_button_state"
+            android:checked="@{category.followedByUser}"
+            android:onClick="@{onSubscribeClick}"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintStart_toStartOf="@id/iv_category"
+            app:layout_constraintTop_toTopOf="@id/iv_category" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

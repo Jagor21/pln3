@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="onPositiveClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onNegativeClick"
+            type="View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_sheet_shape"
+        app:behavior_draggable="true"
+        app:behavior_hideable="true">
+
+        <ImageView
+            android:id="@+id/iv_attention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_34"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_attention" />
+
+        <TextView
+            android:id="@+id/tv_hide_section_title"
+            style="@style/Text_500.SP20.Black"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_54"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_54"
+            android:text="@string/hide_section_title"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_attention" />
+
+        <TextView
+            android:id="@+id/tv_hide_section_description"
+            style="@style/Text_500.SP16.Gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="@string/hide_section_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_hide_section_title" />
+
+        <TextView
+            android:id="@+id/btn_positive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_54"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_34"
+            android:background="@drawable/ripple_black"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_500"
+            android:onClick="@{onPositiveClick}"
+            android:paddingStart="@dimen/margin_28"
+            android:paddingTop="14dp"
+            android:paddingEnd="@dimen/margin_28"
+            android:paddingBottom="14dp"
+            android:text="@string/want_to_hide"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_negative"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_hide_section_description" />
+
+        <TextView
+            android:id="@+id/btn_negative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_54"
+            android:background="@drawable/ripple_gray_dark"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_500"
+            android:onClick="@{onNegativeClick}"
+            android:paddingStart="@dimen/margin_30"
+            android:paddingTop="14dp"
+            android:paddingEnd="@dimen/margin_30"
+            android:paddingBottom="14dp"
+            android:text="@string/no"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_18"
+            app:layout_constraintBottom_toBottomOf="@id/btn_positive"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.909"
+            app:layout_constraintStart_toEndOf="@id/btn_positive"
+            app:layout_constraintTop_toTopOf="@id/btn_positive"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

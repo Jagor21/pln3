@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="titleText"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:parentTag="android.widget.LinearLayout">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Text_700.SP26.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin_24"
+            android:paddingEnd="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_45"
+            android:text="@{titleText}"
+            android:textAlignment="center"
+            tools:text="@string/sections_title" />
+    </LinearLayout>
+</layout>

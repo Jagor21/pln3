@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+<!--        <com.google.android.material.appbar.AppBarLayout-->
+<!--            android:id="@+id/appbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/white"-->
+<!--            android:elevation="@dimen/elevation_4"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <androidx.appcompat.widget.Toolbar-->
+<!--                android:id="@+id/tb_source"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:elevation="@dimen/elevation_4"-->
+<!--                android:paddingTop="@dimen/margin_24"-->
+<!--                app:navigationIcon="@drawable/ic_navigation_back_gray"-->
+<!--                app:title="@string/breaking_news"-->
+<!--                app:titleTextAppearance="@style/Text_700.SP26.Black"-->
+<!--                app:titleTextColor="@color/black" />-->
+<!--        </com.google.android.material.appbar.AppBarLayout>-->
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv_source"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            tools:itemCount="10"
+            tools:listitem="@layout/holder_news_details" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

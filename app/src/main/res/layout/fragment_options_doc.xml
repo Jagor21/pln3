@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="onSendClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="toolbarTitle"
+            type="String" />
+
+        <variable
+            name="docTitle"
+            type="String" />
+
+        <variable
+            name="docText"
+            type="String" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:elevation="@dimen/elevation_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/tb_doc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/elevation_4"
+                    android:paddingTop="@dimen/margin_24"
+                    app:navigationIcon="@drawable/ic_navigation_back_gray"
+                    app:title="@{toolbarTitle}"
+                    app:titleTextAppearance="@style/Text_700.SP26.Black"
+                    app:titleTextColor="@color/black"
+                    tools:title="@string/privacy_policy" />
+            </com.google.android.material.appbar.AppBarLayout>
+            <WebView
+                android:id="@+id/wv_doc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appbar"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_doc_text"-->
+<!--                style="@style/Text_400.SP16.Black"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/margin_24"-->
+<!--                android:layout_marginTop="@dimen/margin_20"-->
+<!--                android:layout_marginEnd="@dimen/margin_24"-->
+<!--                android:layout_marginBottom="@dimen/margin_14"-->
+<!--                android:text="@{docText}"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tv_doc_title"-->
+<!--                tools:text="@string/long_text_placeholder" />-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

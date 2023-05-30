@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.info_turrim.polandnews.utils.extension.DateTimeExtKt" />
+
+        <variable
+            name="onContinueReadingClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onShareClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onLikeClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onBookmarkClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="isUserReal"
+            type="Boolean" />
+
+        <variable
+            name="onSourceClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onBackClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="newsDetails"
+            type="com.info_turrim.polandnews.news_feed.domain.model.NewsDetails" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_news_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            android:src="@drawable/news_placeholder"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_45"
+            android:background="@drawable/bg_social_btns_news_details"
+            android:onClick="@{onBackClick}"
+            app:layout_constraintStart_toStartOf="@id/iv_news_image"
+            app:layout_constraintTop_toTopOf="@id/iv_news_image"
+            app:srcCompat="@drawable/ic_navigation_back_white" />
+
+        <ImageView
+            android:id="@+id/tv_share"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:background="@drawable/bg_social_btns_news_details"
+            android:onClick="@{onShareClick}"
+            app:layout_constraintEnd_toStartOf="@id/iv_bookmark"
+            app:layout_constraintTop_toTopOf="@id/iv_bookmark"
+            app:srcCompat="@drawable/ic_share" />
+
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/iv_bookmark"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="@dimen/margin_45"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:background="@drawable/bg_social_btns_news_details"
+            android:button="@drawable/bookmark_selector"
+            android:checked="@{newsDetails.isFavourites}"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:onClick="@{onBookmarkClick}"
+            android:text="@null"
+            app:layout_constraintEnd_toEndOf="@id/iv_news_image"
+            app:layout_constraintTop_toTopOf="@id/iv_news_image"
+            tools:checked="false" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/iv_news_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/bg_gradient_black">
+
+            <TextView
+                android:id="@+id/tv_news_title"
+                style="@style/Text_700.SP20.White"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginStart="@dimen/margin_24"
+                android:layout_marginEnd="@dimen/margin_24"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{newsDetails.header}"
+                app:layout_constraintBottom_toTopOf="@id/tv_news_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Kobieta, która w czasach gorsetów zostaje wierna sobie. Jak udał się film otwierający Cannes 2023"
+                 />
+
+            <TextView
+                android:id="@+id/tv_news_date"
+                style="@style/Text_600.SP12.Gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="@{DateTimeExtKt.createTime(newsDetails.createdAt)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_news_title"
+                tools:text="4 godziny temu" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
+            android:background="@drawable/bg_news_details_rounded_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_news_image">
+
+            <ImageView
+                android:id="@+id/iv_source"
+                android:layout_width="@dimen/margin_45"
+                android:layout_height="@dimen/margin_45"
+                android:layout_marginStart="@dimen/margin_24"
+                android:layout_marginTop="@dimen/margin_24"
+                android:onClick="@{onSourceClick}"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/ic_app_logo" />
+
+            <TextView
+                android:id="@+id/tv_source_name"
+                style="@style/Text_500.SP16.Black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12"
+                android:onClick="@{onSourceClick}"
+                android:text="@{newsDetails.source.title}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_source"
+                app:layout_constraintStart_toEndOf="@id/iv_source"
+                app:layout_constraintTop_toTopOf="@id/iv_source"
+                tools:text="Dailymail Breaking" />
+
+            <TextView
+                android:id="@+id/tv_news_text"
+                style="@style/Text_400.SP16.Black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_24"
+                android:layout_marginTop="@dimen/margin_24"
+                android:layout_marginEnd="@dimen/margin_24"
+                android:text="@{newsDetails.text}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_source"
+                tools:text="The biggest number of tunnelling machines working simultaneously on one project was recorded in Moscow. The world record was registered by Guinness World Records, as reported by Andrei Bochkaryov, Deputy Moscow Mayor in the Moscow Government for Urban Pla..." />
+
+            <Button
+                android:id="@+id/tv_continue_reading"
+                style="@style/Text_500.SP18.Pink"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_24"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_24"
+                android:background="@drawable/bg_btn_continue_reading"
+                android:onClick="@{onContinueReadingClick}"
+                android:text="@string/continue_reading"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_news_text" />
+
+            <LinearLayout
+                android:id="@+id/like_container"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginTop="@dimen/margin_24"
+                android:onClick="@{onLikeClick}"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/tv_news_text"
+                app:layout_constraintTop_toBottomOf="@id/tv_continue_reading">
+
+                <CheckBox
+                    android:id="@+id/iv_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:button="@drawable/like_selector"
+                    android:checked="@{newsDetails.likedByUser}"
+                    android:clickable="@{isUserReal}"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{onLikeClick}"
+                    tools:checked="true" />
+
+                <TextView
+                    android:id="@+id/tv_likes"
+                    style="@style/Text_500.SP14.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:includeFontPadding="false"
+                    android:onClick="@{onLikeClick}"
+                    android:text="@{Integer.toString(newsDetails.liked)}"
+                    tools:text="23" />
+            </LinearLayout>
+
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/like_container"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/margin_14"-->
+            <!--                android:layout_marginTop="@dimen/margin_14"-->
+            <!--                android:background="@{newsDetails.likedByUser == true ? @drawable/bg_liked_news_details : @drawable/bg_like_news_details}"-->
+            <!--                android:onClick="@{onLikeClick}"-->
+            <!--                android:paddingStart="@dimen/margin_24"-->
+            <!--                android:paddingTop="@dimen/margin_8"-->
+            <!--                android:paddingEnd="@dimen/margin_24"-->
+            <!--                android:paddingBottom="@dimen/margin_8"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/v_separator"-->
+            <!--                app:layout_goneMarginTop="@dimen/margin_16">-->
+
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_vertical"-->
+            <!--                    android:src="@drawable/ic_like_white" />-->
+
+            <!--                <TextView-->
+            <!--                    style="@style/Text_600.SP16.White"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_vertical"-->
+            <!--                    android:layout_marginStart="@dimen/margin_10"-->
+            <!--                    android:text="@{Integer.toString(newsDetails.liked)}"-->
+            <!--                    android:textColor="@color/white"-->
+            <!--                    tools:text="26" />-->
+            <!--            </LinearLayout>-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

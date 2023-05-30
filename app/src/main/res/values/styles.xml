@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Text_400">
+        <item name="fontFamily">@font/poppins_400</item>
+    </style>
+
+    <style name="Text_400.SP14" parent="Text_400">
+        <item name="android:textSize">@dimen/text_14</item>
+    </style>
+
+    <style name="Text_400.SP16" parent="Text_400">
+        <item name="android:textSize">@dimen/text_16</item>
+    </style>
+
+    <style name="Text_400.SP16.Black" parent="Text_400.SP16">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_400.SP14.Red" parent="Text_400.SP14">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="Text_500">
+        <item name="fontFamily">@font/poppins_500</item>
+    </style>
+
+    <style name="Text_500.SP14" parent="Text_500">
+        <item name="android:textSize">@dimen/text_14</item>
+    </style>
+
+    <style name="Text_500.SP16" parent="Text_500">
+        <item name="android:textSize">@dimen/text_16</item>
+    </style>
+
+    <style name="Text_500.SP16.Black" parent="Text_500.SP16">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_500.SP18" parent="Text_500">
+        <item name="android:textSize">@dimen/text_18</item>
+    </style>
+
+    <style name="Text_500.SP20" parent="Text_500">
+        <item name="android:textSize">@dimen/text_20</item>
+    </style>
+
+    <style name="Text_500.SP26" parent="Text_500">
+        <item name="android:textSize">@dimen/text_26</item>
+    </style>
+
+    <style name="Text_500.SP22" parent="Text_500">
+        <item name="android:textSize">@dimen/text_22</item>
+    </style>
+
+    <style name="Text_500.SP14.Black" parent="Text_500.SP14">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_500.SP22.Black" parent="Text_500.SP22">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_500.SP26.Black" parent="Text_500.SP26">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_500.SP14.Gray" parent="Text_500.SP14">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Text_500.SP14.White" parent="Text_500.SP14">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text_500.SP18.White" parent="Text_500.SP18">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text_500.SP18.Red" parent="Text_500.SP18">
+        <item name="android:textColor">@color/tab_indicator_color</item>
+    </style>
+
+    <style name="Text_500.SP16.Gray" parent="Text_500.SP16">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Text_500.SP16.Red" parent="Text_500.SP16">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="Text_500.SP18.Gray" parent="Text_500.SP18">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Text_500.SP20.Gray" parent="Text_500.SP20">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Text_500.SP20.Black" parent="Text_500.SP20">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_500.SP18.Pink" parent="Text_500.SP18">
+        <item name="android:textColor">@color/tab_indicator_color</item>
+    </style>
+
+
+    <style name="Text_600">
+        <item name="fontFamily">@font/poppins_600</item>
+    </style>
+
+    <style name="Text_600.SP20" parent="Text_600">
+        <item name="android:textSize">@dimen/text_20</item>
+    </style>
+
+    <style name="Text_600.SP12" parent="Text_600">
+        <item name="android:textSize">@dimen/text_12</item>
+    </style>
+
+    <style name="Text_600.SP24" parent="Text_600">
+        <item name="android:textSize">@dimen/text_24</item>
+    </style>
+
+    <style name="Text_600.SP26" parent="Text_600">
+        <item name="android:textSize">@dimen/text_26</item>
+    </style>
+
+    <style name="Text_600.SP18" parent="Text_600">
+        <item name="android:textSize">@dimen/text_18</item>
+    </style>
+
+    <style name="Text_600.SP16" parent="Text_600">
+        <item name="android:textSize">@dimen/text_16</item>
+    </style>
+
+    <style name="Text_600.SP22" parent="Text_600">
+        <item name="android:textSize">@dimen/text_22</item>
+    </style>
+
+    <style name="Text_600.SP18.Black" parent="Text_600.SP18">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_600.SP24.Black" parent="Text_600.SP24">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_600.SP22.Black" parent="Text_600.SP22">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_500.SP18.Black" parent="Text_500.SP18">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_600.SP18.Gray" parent="Text_600.SP18">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Text_600.SP16.Gray" parent="Text_600.SP16">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Text_600.SP16.White" parent="Text_600.SP16">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text_600.SP12.Gray" parent="Text_600.SP12">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="Text_600.SP20.Black" parent="Text_600.SP20">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_600.SP16.Black" parent="Text_600.SP16">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_600.SP26.Black" parent="Text_600.SP26">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_700">
+        <item name="fontFamily">@font/poppins_700</item>
+    </style>
+
+    <style name="Text_700.SP14" parent="Text_700">
+        <item name="android:textSize">@dimen/text_14</item>
+    </style>
+
+    <style name="Text_700.SP20" parent="Text_700">
+        <item name="android:textSize">@dimen/text_20</item>
+    </style>
+
+    <style name="Text_700.SP26" parent="Text_700">
+        <item name="android:textSize">@dimen/text_26</item>
+    </style>
+
+    <style name="Text_700.SP14.Black" parent="Text_700.SP14">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_700.SP26.Black" parent="Text_700.SP26">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_26</item>
+        <item name="fontFamily">@font/poppins_700</item>
+    </style>
+
+    <style name="Text_700.SP20.Black" parent="Text_700.SP20">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text_700.SP20.White" parent="Text_700.SP20">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text_700.SP14.Gray" parent="Text_700.SP14">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="NavigationTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/text_14</item>
+        <item name="textAllCaps">false</item>
+        <item name="fontFamily">@font/poppins_500</item>
+    </style>
+
+    <style name="ChipTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@android:color/transparent</item>
+        <item name="tabBackground">@drawable/selector_tab</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabIndicatorHeight">0dp</item>
+    </style>
+
+    <style name="NewsImageShapeAppearance">
+        <item name="cornerSizeBottomLeft">@dimen/radius_10</item>
+        <item name="cornerSizeBottomRight">@dimen/radius_10</item>
+        <item name="cornerSizeTopRight">@dimen/radius_10</item>
+        <item name="cornerSizeTopLeft">@dimen/radius_10</item>
+    </style>
+
+    <style name="SourceImageShapeAppearance">
+        <item name="cornerSizeBottomLeft">@dimen/radius_15</item>
+        <item name="cornerSizeBottomRight">@dimen/radius_15</item>
+        <item name="cornerSizeTopRight">@dimen/radius_15</item>
+        <item name="cornerSizeTopLeft">@dimen/radius_15</item>
+    </style>
+
+    <style name="Text_500.SP16.Black.NewsCheckbox" parent="Text_500.SP16.Black">
+        <item name="android:paddingStart">@dimen/margin_8</item>
+    </style>
+
+<!--    <item name="CustomChipChoiceStyle">@style/Widget.BPay.Chip</item>-->
+
+
+    <style name="CustomChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_16</item>
+        <item name="fontFamily">@font/poppins_500</item>
+        <item name="chipBackgroundColor">@color/white</item>
+        <item name="chipCornerRadius">@dimen/radius_15</item>
+    </style>
+
+    <style name="CustomTextInputLayout"
+        parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/gray</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_15</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_15</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_15</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_15</item>
+        <item name="hintTextColor">@color/gray</item>
+        <item name="errorTextColor">@color/colorPrimary</item>
+        <item name="errorTextAppearance">@style/Text_400.SP14.Red</item>
+        <item name="boxStrokeErrorColor">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="ShapeAppearanceBottomSheetDialog">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="BorderlessButtonRed" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">@color/tab_indicator_color</item>
+        <item name="fontFamily">@font/poppins_500</item>
+        <item name="android:textSize">@dimen/text_18</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="BorderlessButtonGray" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">@color/gray</item>
+        <item name="fontFamily">@font/poppins_500</item>
+        <item name="android:textSize">@dimen/text_18</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSizeTopLeft">8%</item>
+        <item name="cornerSizeTopRight">8%</item>
+    </style>
+</resources>
