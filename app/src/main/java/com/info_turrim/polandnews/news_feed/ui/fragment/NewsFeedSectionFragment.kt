@@ -125,23 +125,23 @@ class NewsFeedSectionFragment :
                     viewModel.news.observe(viewLifecycleOwner) {
                         it.fold(
                             onSuccess = {
-
                                 val news = mutableListOf<News>()
                                 news.addAll(it)
-
+                                val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
                                 val adList = (activity as MainActivity).adList
+                                if (needToShowAd && adList.isNotEmpty()) {
+                                    val newsCount = it.size / 5
+                                    var insertAdIndex = 5
+                                    var adIndex = 0
 
-                                val newsCount = it.size / 5
-                                var insertAdIndex = 5
-                                var adIndex = 0
-
-                                repeat(newsCount) {
-                                    if (adIndex >= adList.size - 1) {
-                                        adIndex = 0
+                                    repeat(newsCount) {
+                                        if (adIndex >= adList.size - 1) {
+                                            adIndex = 0
+                                        }
+                                        news.add(insertAdIndex, adList[adIndex])
+                                        insertAdIndex += 6
+                                        adIndex++
                                     }
-                                    news.add(insertAdIndex, adList[adIndex])
-                                    insertAdIndex += 6
-                                    adIndex++
                                 }
                                 newsFeedController.newsList = news
                                 newsList = news
