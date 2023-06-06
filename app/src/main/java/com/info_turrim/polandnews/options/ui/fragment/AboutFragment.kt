@@ -3,6 +3,9 @@ package com.info_turrim.polandnews.options.ui.fragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.info_turrim.polandnews.BuildConfig
@@ -29,7 +32,8 @@ class AboutFragment : BaseFragment<FragmentAboutBinding>(R.layout.fragment_about
             onCheckUpdatesClick = View.OnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW).apply {
                     data = Uri.parse(
-                        "https://play.google.com/store/apps/details?id=com.info_turrim.polandnews")
+                        "https://play.google.com/store/apps/details?id=com.info_turrim.polandnews"
+                    )
                     setPackage("com.android.vending")
                 }
                 startActivity(intent)
@@ -37,6 +41,16 @@ class AboutFragment : BaseFragment<FragmentAboutBinding>(R.layout.fragment_about
             //TODO ask about the source of title and description
 //            aboutTitle = "Title"
 //            aboutDescription = getString(R.string.long_text_placeholder)
+
+//            aboutDescription = createSpannedText(getString(R.string.about_text))
+            tvAboutDescription.text = createSpannedText(getString(R.string.about_text))
+            tvAboutDescription.movementMethod = LinkMovementMethod.getInstance()
         }
+    }
+
+    private fun createSpannedText(text: String): SpannableString {
+        val spannableString = SpannableString(text)
+        Linkify.addLinks(spannableString, Linkify.EMAIL_ADDRESSES)
+        return spannableString
     }
 }

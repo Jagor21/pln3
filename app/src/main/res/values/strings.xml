@@ -227,7 +227,7 @@
     <string name="long_text_placeholder">"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.   Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.      Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante.  Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.   Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. "</string>
     <string name="app_name">Polska Wiadomości</string>
     <string name="comment_count">(%d)</string>
-<!--    <string name="google_sign_in_client_id" tools:ignore="TypographyDashes">984587005591-i0r2njghmc0qkbq7pv5mrk7jlo8m2frm.apps.googleusercontent.com</string>-->
+    <!--    <string name="google_sign_in_client_id" tools:ignore="TypographyDashes">984587005591-i0r2njghmc0qkbq7pv5mrk7jlo8m2frm.apps.googleusercontent.com</string>-->
     <string name="Appmetrica_API_Key" />
     <string name="test_url">https://google.com</string>
 
@@ -237,5 +237,7 @@
     <string name="reminders_notification_channel_name">news_poland_channel_name</string>
     <string name="appsflyer_dev_key">rawisZVwzRBHjWtvLA3e5j</string>
     <string name="empty_message">Wiadomość nie powinna być pusta</string>
+
+    <string name="about_text">Polska Wiadomości is your go-to app for staying updated on the latest news from Poland. We provide real-time updates on politics, culture, sports, and more. For any inquiries or feedback, feel free to reach out to us at browneyes8837@gmail.com.</string>
 
 </resources>
