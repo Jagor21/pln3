@@ -16,6 +16,7 @@ import com.info_turrim.polandnews.start_screen.ui.view_model.StartScreenViewMode
 import com.info_turrim.polandnews.utils.extension.*
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.info_turrim.polandnews.auth.data.model.TokenResponse
 
 private const val RC_SIGN_IN = 1
 
@@ -38,7 +39,7 @@ class StartScreenFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.sendNotificationToken()
+//        viewModel.sendNotificationToken()
         bindViews()
         observeViewModel()
     }
@@ -132,7 +133,7 @@ class StartScreenFragment :
             }
             profileResult.observe(viewLifecycleOwner) {
                 prefs.setToken(
-                    com.info_turrim.polandnews.auth.data.model.TokenResponse(
+                    TokenResponse(
                         access_token = it.accessToken,
                         refresh_token = it.refreshToken
                     )

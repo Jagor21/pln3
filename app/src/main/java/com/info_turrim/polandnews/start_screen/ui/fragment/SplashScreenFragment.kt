@@ -6,12 +6,15 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.*
 import com.info_turrim.polandnews.R
 import com.info_turrim.polandnews.base.BaseFragment
 import com.info_turrim.polandnews.databinding.FragmentSplashScreenBinding
 import com.info_turrim.polandnews.start_screen.ui.view_model.SplashScreenViewModel
 import com.info_turrim.polandnews.utils.extension.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenFragment :
@@ -42,9 +45,6 @@ class SplashScreenFragment :
 
     private fun observeViewModel() {
         viewModel.apply {
-            binding.tvDescription.setOnClickListener {
-                navController.navigate(R.id.action_splashScreenFragment_to_startScreenFragment)
-            }
             progress.observe(viewLifecycleOwner, Observer {
                 binding.pbProgress.progress = it
             })
@@ -68,11 +68,11 @@ class SplashScreenFragment :
                     navController.navigate(R.id.action_splashScreenFragment_to_newsGraph)
                 }
             })
-            needOpenStart.observe(viewLifecycleOwner) {
+            needOpenStart.onEach {
                 if (it) {
                     navController.navigate(R.id.action_splashScreenFragment_to_startScreenFragment)
                 }
-            }
+            }.launchIn(lifecycleScope)
 
             profileData.observe(viewLifecycleOwner) {
                 prefs.setProfile(it.profile)
@@ -89,7 +89,7 @@ class SplashScreenFragment :
                 getFollowedSections()
             }
             atLeastOneSectionSelected.observe(viewLifecycleOwner) {
-                if(it) {
+                if (it) {
                     navController.navigate(R.id.action_splashScreenFragment_to_newsGraph)
                 } else {
                     navController.navigate(R.id.action_splashScreenFragment_to_sectionsGraph)

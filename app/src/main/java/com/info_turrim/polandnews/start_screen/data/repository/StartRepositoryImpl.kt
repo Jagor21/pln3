@@ -5,6 +5,8 @@ import com.info_turrim.polandnews.start_screen.data.repository.datasource.StartD
 import com.info_turrim.polandnews.start_screen.domain.StartRepository
 import javax.inject.Inject
 import com.info_turrim.polandnews.base.Result
+import com.info_turrim.polandnews.start_screen.data.model.PushTokenParam
+import com.info_turrim.polandnews.start_screen.data.model.PushTokenResponse
 
 class StartRepositoryImpl @Inject constructor(
     private val startDataSource: StartDataSource
@@ -14,7 +16,7 @@ class StartRepositoryImpl @Inject constructor(
         return startDataSource.getFollowedSections()
     }
 
-    override suspend fun sendPushNotificationToken(token: String): Result<Unit> {
-        return startDataSource.sendPushNotificationToken(token)
+    override suspend fun sendPushNotificationToken(tokenParam: PushTokenParam): Result<PushTokenResponse> {
+        return startDataSource.sendPushNotificationToken(tokenParam)
     }
 }

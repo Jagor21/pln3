@@ -14,6 +14,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.info_turrim.polandnews.base.Result
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class SplashScreenViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences,
@@ -42,9 +45,8 @@ class SplashScreenViewModel @Inject constructor(
     val needOpenFeed: LiveData<Boolean>
         get() = _needOpenFeed
 
-    private val _needOpenStart = MutableLiveData<Boolean>()
-    val needOpenStart: LiveData<Boolean>
-        get() = _needOpenStart
+    private val _needOpenStart = MutableStateFlow<Boolean>(false)
+    val needOpenStart = _needOpenStart.asStateFlow()
 
     private val _profileData = MutableLiveData<SignUpProfile>()
     val profileData: LiveData<SignUpProfile>
@@ -104,56 +106,13 @@ class SplashScreenViewModel @Inject constructor(
             } else {
                 updateProgress()
                 if(prefs.isTermsPolicyAccepted()) {
-                    _needOpenStart.value = true
+                    _needOpenStart.update { true }
                 } else {
                     _needOpenTerms.value = true
                 }
                 updateProgress()
             }
         }
-
-
-//        updateProgress()
-//        if (prefs.getUserPassword().isEmpty()) {
-//            updateProgress()
-//            if (prefs.getFirstLaunch()) {
-//                updateProgress()
-//                prefs.setFirstLaunch(false)
-//                updateProgress()
-//                _needOpenDisclaimer.value = true
-//            } else {
-//                updateProgress()
-//                _needOpenStart.value = true
-//                updateProgress()
-//            }
-//        } else {
-//            updateProgress()
-//            launchUseCase {
-//                signInUseCase.execute(
-//                    SignUpEmailRequest(
-//                        city = null,
-//                        country = null,
-//                        email = prefs.getUserEmail(),
-//                        gclid = null,
-//                        password = prefs.getUserPassword(),
-//                        sex = null,
-//                        username = prefs.getUserName(),
-//                        year_of_birth = null
-//                    )
-//                ) {
-//                    it.fold(
-//                        onSuccess = {
-//                            updateProgress()
-//                            _profileData.value = it
-//                        },
-//                        onFailure = {
-//
-//                        }
-//                    )
-//                    updateProgress()
-//                }
-//            }
-//        }
     }
 
     private fun signIn(param: SignUpEmailRequest) {

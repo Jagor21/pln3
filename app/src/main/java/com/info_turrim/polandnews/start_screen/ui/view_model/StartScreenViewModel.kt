@@ -17,6 +17,7 @@ import com.info_turrim.polandnews.start_screen.domain.use_case.SendPushTokenUseC
 import com.info_turrim.polandnews.utils.extension.*
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.info_turrim.polandnews.start_screen.data.model.PushTokenParam
 import javax.inject.Inject
 
 class StartScreenViewModel @Inject constructor(
@@ -57,6 +58,7 @@ class StartScreenViewModel @Inject constructor(
                         prefs.setUserPassword(randomPass)
                         prefs.setIsUserLoggedIn(true)
                         prefs.setIsUserReal(false)
+                        sendNotificationToken()
                         _fakeSignUpResult.value = true
                     },
                     onFailure = {
@@ -161,9 +163,11 @@ class StartScreenViewModel @Inject constructor(
             }
             val token = task.result
             launchUseCase {
-                sendPushTokenUseCase.execute(token) {
+                sendPushTokenUseCase.execute(PushTokenParam(token = token)) {
                     it.fold(
-                        onSuccess = {},
+                        onSuccess = { tokenResult ->
+                            Log.d("PUSH_TOKEN", tokenResult.result)
+                        },
                         onFailure = {}
                     )
                 }

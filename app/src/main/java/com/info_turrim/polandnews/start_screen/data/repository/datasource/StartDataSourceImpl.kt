@@ -8,6 +8,8 @@ import com.info_turrim.polandnews.start_screen.data.remote.StartApi
 import com.info_turrim.polandnews.utils.extension.bodyOrError
 import javax.inject.Inject
 import com.info_turrim.polandnews.base.Result
+import com.info_turrim.polandnews.start_screen.data.model.PushTokenParam
+import com.info_turrim.polandnews.start_screen.data.model.PushTokenResponse
 
 class StartDataSourceImpl @Inject constructor(
     private val startApi: StartApi,
@@ -20,8 +22,8 @@ class StartDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun sendPushNotificationToken(token: String): Result<Unit> {
-        return execute { startApi.addToken(token) }
+    override suspend fun sendPushNotificationToken(tokenParam: PushTokenParam): Result<PushTokenResponse> {
+        return execute { startApi.addToken(tokenParam).bodyOrError() }
     }
 
 }

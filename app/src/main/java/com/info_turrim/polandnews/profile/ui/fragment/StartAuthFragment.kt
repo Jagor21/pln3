@@ -40,7 +40,7 @@ class StartAuthFragment : BaseFragment<FragmentStartAuthBinding>(R.layout.fragme
                 navController.navigate(R.id.auth_fragment, bundleOf("isSignIn" to true))
             }
             onSignUpClick = View.OnClickListener {
-                navController.navigate(R.id.auth_fragment, bundleOf("isSignIn" to true))
+                navController.navigate(R.id.auth_fragment, bundleOf("isSignIn" to false))
             }
         }
     }
