@@ -76,13 +76,11 @@ class NewsDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getAd(getAdRequestParam: GetAdRequestParam): Result<List<News>> {
-        return execute {
-            val result = adApi.getAds(
-                uuid = getAdRequestParam.uuid,
-                adsQuantity = getAdRequestParam.adsQuantity
-            ).bodyOrError()
-            adToNewsDomainMapper.toListMapper().map(result.feed)
-        }
+    override suspend fun getAd(getAdRequestParam: GetAdRequestParam): List<News> {
+        val result = adApi.getAds(
+            uuid = getAdRequestParam.uuid,
+            adsQuantity = getAdRequestParam.adsQuantity
+        )
+        return adToNewsDomainMapper.toListMapper().map(result.feed)
     }
 }

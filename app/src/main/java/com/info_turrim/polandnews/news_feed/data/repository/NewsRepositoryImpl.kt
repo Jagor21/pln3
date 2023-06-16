@@ -1,6 +1,10 @@
 package com.info_turrim.polandnews.news_feed.data.repository
 
+import android.content.SharedPreferences
 import android.util.Log
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.info_turrim.polandnews.MainActivity
 import com.info_turrim.polandnews.common.toListMapper
 import com.info_turrim.polandnews.news_feed.data.model.FavoriteRequest
 import com.info_turrim.polandnews.news_feed.data.model.GetForYouNewsRequestParam
@@ -14,6 +18,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import com.info_turrim.polandnews.base.Result
 import com.info_turrim.polandnews.news_feed.data.model.GetAdRequestParam
+import com.info_turrim.polandnews.utils.extension.getUUID
+import com.info_turrim.polandnews.utils.extension.setUUID
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -24,6 +30,7 @@ class NewsRepositoryImpl @Inject constructor(
     private val newsDataSource: NewsDataSource,
     private val newsToDomainMapper: NewsToDomainMapper,
     private val forYouNewsToDomainMapper: ForYouNewsToDomainMapper,
+    private val prefs: SharedPreferences,
 //    private val adManager: AdManager,
 ) : NewsRepository {
 
@@ -41,6 +48,12 @@ class NewsRepositoryImpl @Inject constructor(
     // avoid triggering multiple requests in the same time
     private var isRequestInProgress = false
     private var isForYouNewsEmpty = false
+
+    private var adList: List<News> = listOf()
+
+    private var uuid: String = ""
+
+    var adIndex = 0
 
     override suspend fun getNews(getNewsRequestParam: GetNewsRequestParam): Flow<Result<Set<News>>> {
         lastRequestedPage = 1
@@ -67,7 +80,7 @@ class NewsRepositoryImpl @Inject constructor(
 
     override suspend fun requestMoreForYou(getForYouNewsRequestParam: GetForYouNewsRequestParam) {
         if (isRequestInProgress) return
-        if (!isForYouNewsEmpty){
+        if (!isForYouNewsEmpty) {
             val successful =
                 requestForYouNews(getForYouNewsRequestParam.copy(pageIndex = lastRequestedPage))
             if (successful) {
@@ -103,8 +116,33 @@ class NewsRepositoryImpl @Inject constructor(
         try {
             val response =
                 newsDataSource.getNews(getNewsRequestParam.copy(page = lastRequestedPage))
-            val news = newsToDomainMapper.toListMapper().map(response)
-
+            val news = newsToDomainMapper.toListMapper().map(response).toMutableList()
+            val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
+            val ads = adList
+            if (needToShowAd && ads.isNotEmpty()) {
+                val newsCount = news.size / 5
+                var insertAdIndex = 5
+                repeat(newsCount) {
+                    news.add(insertAdIndex, ads[adIndex])
+                    if (adIndex >= ads.size - 1) {
+                        uuid = prefs.getUUID()
+                        if (uuid.isEmpty()) {
+                            uuid = java.util.UUID.randomUUID().toString()
+                            prefs.setUUID(uuid)
+                        }
+                        getAd(
+                            GetAdRequestParam(
+                                uuid = uuid,
+                                adsQuantity = 10
+                            )
+                        )
+                        adIndex = 0
+                    }
+                    insertAdIndex += 6
+                    adIndex++
+                }
+            }
+            inMemoryCache.clear()
             inMemoryCache.addAll(news)
             newsResults.emit(Result.Success(inMemoryCache))
             successful = true
@@ -125,12 +163,37 @@ class NewsRepositoryImpl @Inject constructor(
     private suspend fun requestForYouNews(getForYouNewsRequestParam: GetForYouNewsRequestParam): Boolean {
         isRequestInProgress = true
         var successful = false
-
         try {
             val response =
                 newsDataSource.getForYouNews(getForYouNewsRequestParam.copy(pageIndex = lastRequestedPage))
             val news = newsToDomainMapper.toListMapper().map(response).toMutableList()
             if (news.isNotEmpty()) {
+                val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
+                val ads = adList
+                if (needToShowAd && ads.isNotEmpty()) {
+                    val newsCount = news.size / 5
+                    var insertAdIndex = 5
+                    repeat(newsCount) {
+                        news.add(insertAdIndex, ads[adIndex])
+                        if (adIndex >= ads.size - 1) {
+                            uuid = prefs.getUUID()
+                            if (uuid.isEmpty()) {
+                                uuid = java.util.UUID.randomUUID().toString()
+                                prefs.setUUID(uuid)
+                            }
+                            getAd(
+                                GetAdRequestParam(
+                                    uuid = uuid,
+                                    adsQuantity = 10
+                                )
+                            )
+                            adIndex = 0
+                        }
+                        insertAdIndex += 6
+                        adIndex++
+                    }
+                }
+                inMemoryCache.clear()
                 inMemoryCache.addAll(news)
                 newsResults.emit(Result.Success(inMemoryCache))
                 successful = true
@@ -155,7 +218,7 @@ class NewsRepositoryImpl @Inject constructor(
         return successful
     }
 
-    override suspend fun getAd(getAdRequestParam: GetAdRequestParam): Result<List<News>> {
-        return newsDataSource.getAd(getAdRequestParam)
+    override suspend fun getAd(getAdRequestParam: GetAdRequestParam)/*: Result<List<News>>*/ {
+        adList = newsDataSource.getAd(getAdRequestParam)
     }
 }

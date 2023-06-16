@@ -1,6 +1,8 @@
 package com.info_turrim.polandnews.utils.extension
 
 import android.widget.ImageView
+import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -51,5 +53,14 @@ fun ImageView.loadImage(url: String, isNewsSourceImage: Boolean) {
 //        .transition(DrawableTransitionOptions().crossFade(factory))
         .apply(if (isNewsSourceImage) options15 else options10)
         .into(this)
+}
+
+fun ImageView.loadImageCoil(url: String, isNewsSourceImage: Boolean) {
+    val roundedCornersTop = RoundedCornersTransformation(48f, 48f, 0f, 0f)
+    val roundedCorners = RoundedCornersTransformation(15f)
+    this.load(url) {
+        placeholder(if (isNewsSourceImage) R.drawable.ic_app_logo else R.drawable.news_placeholder)
+        transformations(if (isNewsSourceImage) roundedCorners else roundedCornersTop)
+    }
 }
 

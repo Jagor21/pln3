@@ -12,5 +12,6 @@ interface NewsDataSource {
     suspend fun likeNews(newsId: Int): Result<LikeNews>
     suspend fun getForYouNews(getForYouNewsRequestParam: GetForYouNewsRequestParam): NewsListResponse
     suspend fun removeFromFavourite(id: Int): Result<AddToFavourite>
-    suspend fun getAd(getAdRequestParam: GetAdRequestParam): Result<List<News>>
+    suspend fun getAd(getAdRequestParam: GetAdRequestParam): List<News>
+//    suspend fun confirmAd(getAdRequestParam: GetAdRequestParam): Result<List<News>>
 }

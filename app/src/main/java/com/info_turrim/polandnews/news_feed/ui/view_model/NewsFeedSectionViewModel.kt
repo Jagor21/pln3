@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 import com.info_turrim.polandnews.base.Result
+import com.info_turrim.polandnews.news_feed.data.model.GetAdRequestParam
 
 private const val VISIBLE_THRESHOLD = 3
 
@@ -147,7 +148,9 @@ class NewsFeedSectionViewModel @Inject constructor(
         }
     }
 
-    fun getFavouritesNews() {
-        launchUseCase {  }
+    fun getAd(getAdRequestParam: GetAdRequestParam) {
+        launchUseCase {
+            newsRepository.getAd(getAdRequestParam)
+        }
     }
 }

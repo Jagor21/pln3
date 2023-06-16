@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class News(
+    val ad: Boolean = false,
     val breaking: Boolean,
     val commented: Int,
     val createdAt: String,
@@ -21,7 +22,9 @@ data class News(
     val sourceUniqueId: String,
     val text: String,
     val video: String,
-    val isAd: Boolean = false
+    val isAd: Boolean = false,
+    val confirmUrl: String = "",
+    val wasConfirmed: Boolean = false
 //    @Transient var isAd: Boolean = false,
 //    val id: Int,
 //    val commented: Int,

@@ -13,6 +13,7 @@ class AdToNewsDomainMapper @Inject constructor(): Mapper<AdResponse, News> {
     override fun map(from: AdResponse): News {
         return with(from) {
             News(
+                ad = true,
                 isAd = true,
                 id = from.adId,
                 commented = Random.nextInt(7, 100),
@@ -39,7 +40,8 @@ class AdToNewsDomainMapper @Inject constructor(): Mapper<AdResponse, News> {
                 breaking = false,
                 likeCount = Random.nextInt(7, 100),
                 isFavourites = false,
-                sourceUniqueId = ""
+                sourceUniqueId = "",
+                confirmUrl = from.confirmUrl
             )
         }
     }

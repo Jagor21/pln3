@@ -47,6 +47,7 @@ class MainActivity : DaggerAppCompatActivity() {
     var adList: List<News> = listOf()
 
     private var currentDestination: Int = -1
+    var uuid: String = ""
 
     private val destinationChangedListener: NavController.OnDestinationChangedListener by lazy {
         NavController.OnDestinationChangedListener { _, destination, args ->
@@ -129,25 +130,29 @@ class MainActivity : DaggerAppCompatActivity() {
 
         binding.bottomNavView.isGone = true
         setLocale("pl")
-        var uuid = prefs.getUUID()
+        uuid = prefs.getUUID()
         if (uuid.isEmpty()) {
             uuid = UUID.randomUUID().toString()
             prefs.setUUID(uuid)
         }
-        val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
-        if(needToShowAd){
-            viewModel.getAd(
-                GetAdRequestParam(
-                    uuid = uuid,
-                    adsQuantity = 10
-                )
-            )
-        }
+//        val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
+//        if(needToShowAd){
+//            getAd()
+//        }
 
-        viewModel.adList.observe(this) {
-            adList = it
-        }
+//        viewModel.adList.observe(this) {
+//            adList = it
+//        }
     }
+
+//    fun getAd() {
+//        viewModel.getAd(
+//            GetAdRequestParam(
+//                uuid = uuid,
+//                adsQuantity = 10
+//            )
+//        )
+//    }
 
     private fun setLocale(language: String) {
         val locale = Locale(language)
@@ -215,7 +220,6 @@ class MainActivity : DaggerAppCompatActivity() {
             navController.navigate(R.id.news_graph)
         }
     }
-
 }
 
 

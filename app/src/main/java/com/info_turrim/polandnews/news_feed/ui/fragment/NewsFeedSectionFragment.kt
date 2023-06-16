@@ -2,6 +2,7 @@ package com.info_turrim.polandnews.news_feed.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -9,6 +10,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.info_turrim.polandnews.MainActivity
 import com.info_turrim.polandnews.R
 import com.info_turrim.polandnews.base.*
@@ -25,6 +30,7 @@ import com.info_turrim.polandnews.utils.extension.EMPTY
 import com.info_turrim.polandnews.utils.extension.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.info_turrim.polandnews.news_feed.data.model.GetAdRequestParam
 
 private const val POSITION = "position"
 private const val FILTER_TYPE = "FILTER_TYPE"
@@ -50,15 +56,18 @@ class NewsFeedSectionFragment :
     private var categoryId = -1
 
     private var newsList = emptyList<News>()
-    private var forYouNewsList = emptyList<News>()
+    private var forYouNewsList = mutableListOf<News>()
 
     private var savedNewsPosition = -1
+
+    private var isAdConfirmRequestFinished = true
+    private var uuid: String = ""
 
     companion object {
         fun getInstance(
             position: Int,
             filterType: String,
-            categoryId: Int
+            categoryId: Int,
         ): NewsFeedSectionFragment {
             val fragment = NewsFeedSectionFragment()
             fragment.arguments =
@@ -100,7 +109,17 @@ class NewsFeedSectionFragment :
 //            }
         }
         arguments?.getInt(CATEGORY_ID)?.let { categoryId = it }
-
+        uuid = prefs.getUUID()
+        if (uuid.isEmpty()) {
+            uuid = java.util.UUID.randomUUID().toString()
+            prefs.setUUID(uuid)
+        }
+        viewModel.getAd(
+            GetAdRequestParam(
+                uuid = uuid,
+                adsQuantity = 10
+            )
+        )
         if (categoryId != -1) {
             if (newsList.isEmpty()) {
                 newsFeedController = NewsFeedController(requireContext())
@@ -121,28 +140,30 @@ class NewsFeedSectionFragment :
                     getNewsRequestParam?.let {
                         viewModel.loadNews(it)
                     }
-
                     viewModel.news.observe(viewLifecycleOwner) {
                         it.fold(
                             onSuccess = {
-                                val news = mutableListOf<News>()
+//                                val news = mutableListOf<News>()
+//                                news.addAll(it)
+//                                val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
+//                                val adList = (activity as MainActivity).adList
+//                                if (needToShowAd && adList.isNotEmpty()) {
+//                                    val newsCount = it.size / 5
+//                                    var insertAdIndex = 5
+//                                    var adIndex = 0
+//
+//                                    repeat(newsCount) {
+//                                        news.add(insertAdIndex, adList[adIndex])
+//                                        if (adIndex >= adList.size - 1) {
+//                                            (activity as MainActivity).getAd()
+//                                            adIndex = 0
+//                                        }
+//                                        insertAdIndex += 6
+//                                        adIndex++
+//                                    }
+//                                }
+                                val news = newsFeedController.newsList
                                 news.addAll(it)
-                                val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
-                                val adList = (activity as MainActivity).adList
-                                if (needToShowAd && adList.isNotEmpty()) {
-                                    val newsCount = it.size / 5
-                                    var insertAdIndex = 5
-                                    var adIndex = 0
-
-                                    repeat(newsCount) {
-                                        if (adIndex >= adList.size - 1) {
-                                            adIndex = 0
-                                        }
-                                        news.add(insertAdIndex, adList[adIndex])
-                                        insertAdIndex += 6
-                                        adIndex++
-                                    }
-                                }
                                 newsFeedController.newsList = news
                                 newsList = news
                             },
@@ -158,7 +179,7 @@ class NewsFeedSectionFragment :
                 newsFeedController.listener = ::onEventClick
                 newsFeedController.isUserReal = prefs.getIsUserReal()
                 binding.rvNews.setController(newsFeedController)
-                newsFeedController.newsList = newsList
+                newsFeedController.newsList = newsList.toMutableList()
                 binding.rvNews.postDelayed(Runnable {
                     binding.rvNews.scrollToPosition(savedNewsPosition)
                 }, 500L)
@@ -171,27 +192,30 @@ class NewsFeedSectionFragment :
                 binding.rvNews.setController(newsFeedController)
                 viewModel.forYouNews.observe(viewLifecycleOwner) {
                     it.fold(
-                        onSuccess = {
-                            val news = mutableListOf<News>()
-                            news.addAll(it)
-                            val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
-                            val adList = (activity as MainActivity).adList
-                            if (needToShowAd && adList.isNotEmpty()) {
-                                val newsCount = it.size / 5
-                                var insertAdIndex = 5
-                                var adIndex = 0
-
-                                repeat(newsCount) {
-                                    if (adIndex >= adList.size - 1) {
-                                        adIndex = 0
-                                    }
-                                    news.add(insertAdIndex, adList[adIndex])
-                                    insertAdIndex += 6
-                                    adIndex++
-                                }
-                            }
+                        onSuccess = {newNews ->
+//                            val news = mutableListOf<News>()
+//                            news.addAll(newNews)
+//                            val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
+//                            val adList = (activity as MainActivity).adList
+//                            if (needToShowAd && adList.isNotEmpty()) {
+//                                val newsCount = newNews.size / 5
+//                                var insertAdIndex = 5
+//                                var adIndex = 0
+//
+//                                repeat(newsCount) {
+//                                    news.add(insertAdIndex, adList[adIndex])
+//                                    if (adIndex >= adList.size - 1) {
+//                                        (activity as MainActivity).getAd()
+//                                        adIndex = 0
+//                                    }
+//                                    insertAdIndex += 6
+//                                    adIndex++
+//                                }
+//                            }
+                            val news = newsFeedController.newsList.toMutableList()
+                            news.addAll(newNews)
                             newsFeedController.newsList = news
-                            newsList = news
+//                            newsList = news
                         },
                         onFailure = {
 
@@ -233,6 +257,61 @@ class NewsFeedSectionFragment :
                     totalItemCount,
                     categoryId == -1
                 )
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+
+                for (position in firstVisibleItemPosition..lastVisibleItemPosition) {
+                    val item = newsFeedController.newsList[position]
+
+                    if (item.isAd) {
+                        if (!item.wasConfirmed) {
+                            val url = if (!item.confirmUrl.contains("https")) {
+                                "https:${item.confirmUrl}"
+                            } else {
+                                item.confirmUrl
+                            }
+                            if (isAdConfirmRequestFinished) {
+                                isAdConfirmRequestFinished = false
+                                Log.d(
+                                    "AD_CONFIRM_REQUEST",
+                                    "Making confirmUrl request for ${item.id}"
+                                )
+                                val request = object : StringRequest(
+                                    Method.POST, url,
+                                    Response.Listener { response ->
+                                        Log.d("CONFIRM_RESPONSE", "SUCCESS: $response")
+                                        (activity as MainActivity).adList =
+                                            (activity as MainActivity).adList.map { ad ->
+                                                if (ad.id == item.id) {
+                                                    ad.copy(wasConfirmed = true)
+                                                } else {
+                                                    ad
+                                                }
+                                            }
+
+                                        newsFeedController.newsList =
+                                            newsFeedController.newsList.map { news ->
+                                                if (news.isAd) {
+                                                    if (news.id == item.id) {
+                                                        news.copy(wasConfirmed = true)
+                                                    } else {
+                                                        news
+                                                    }
+                                                } else {
+                                                    news
+                                                }
+                                            }.toMutableList()
+                                        isAdConfirmRequestFinished = true
+                                    },
+                                    Response.ErrorListener { error ->
+                                        Log.d("CONFIRM_RESPONSE", "ERROR: $error")
+                                        isAdConfirmRequestFinished = true
+                                    }) {}
+                                Volley.newRequestQueue(context).add(request)
+                            }
+                        }
+                    }
+                }
             }
         })
     }
@@ -242,6 +321,7 @@ class NewsFeedSectionFragment :
             is AdClickEvent -> {
                 requireContext().openCustomTab("https:${event.adUrl}")
             }
+
             is NewsLikeClickEvent -> {
                 if (prefs.getIsUserReal()) {
                     viewModel.likeNews(event.id)
@@ -256,6 +336,7 @@ class NewsFeedSectionFragment :
                     }
                 }
             }
+
             is CommentsClickEvent -> {
                 navController.saveStateAndNavigate(
                     R.id.action_newsFeedFragment_to_newsCommentsFragment,
@@ -264,6 +345,7 @@ class NewsFeedSectionFragment :
                     saveNewsFeedAndPosition(event.position)
                 }
             }
+
             is ShareClickEvent -> {
                 val shareIntent = Intent(Intent.ACTION_SEND).also {
                     it.type = "text/plain"
@@ -278,6 +360,7 @@ class NewsFeedSectionFragment :
 
                 viewModel.onShareNews(event.id)
             }
+
             is AddToFavouritesClickEvent -> {
                 if (prefs.getIsUserReal()) {
                     viewModel.addToFavorite(FavoriteRequest(news = event.newsId))
@@ -292,9 +375,11 @@ class NewsFeedSectionFragment :
                     }
                 }
             }
+
             is RemoveFromFavouritesClickEvent -> {
                 viewModel.removeFromFavourite(event.id)
             }
+
             is NewsClickEvent -> {
                 navController.saveStateAndNavigate(
                     R.id.action_newsFeedFragment_to_newsDetailsFragment,
@@ -316,6 +401,7 @@ class NewsFeedSectionFragment :
                     saveNewsFeedAndPosition(event.position)
                 }
             }
+
             else -> {}
         }
     }

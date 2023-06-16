@@ -9,9 +9,9 @@ import javax.inject.Inject
 
 class GetAdUseCase @Inject constructor(
     private val newsRepository: NewsRepository
-) : BaseUseCase<GetAdRequestParam, List<News>>() {
+)/* : BaseUseCase<GetAdRequestParam, Unit>() {
 
-    override suspend fun run(param: GetAdRequestParam): Result<List<News>> {
+    override suspend fun run(param: GetAdRequestParam): Result<Unit> {
         return newsRepository.getAd(param)
     }
-}
+}*/

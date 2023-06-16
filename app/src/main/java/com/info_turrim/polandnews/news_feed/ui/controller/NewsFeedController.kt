@@ -13,7 +13,7 @@ import com.info_turrim.polandnews.options.domain.model.FavouritesNewsItem
 
 class NewsFeedController constructor(val context: Context) : EpoxyController() {
 
-    var newsList by EpoxyModelProperty<List<News>> { emptyList() }
+    var newsList by EpoxyModelProperty<MutableList<News>> { mutableListOf() }
     var favouriteNews by EpoxyModelProperty<List<FavouritesNewsItem>> { emptyList() }
     var isUserReal by EpoxyModelProperty<Boolean> { false }
 
