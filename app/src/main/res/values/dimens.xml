@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="tablayout_chip_radius">20dp</dimen>
+
+    <dimen name="social_button_like_big_model_view_width">24dp</dimen>
     <!--margins-->
     <dimen name="margin_7">7dp</dimen>
     <dimen name="margin_8">8dp</dimen>
@@ -52,4 +55,6 @@
     <dimen name="margin_48">48dp</dimen>
     <dimen name="margin_56">56dp</dimen>
     <dimen name="margin_34">34dp</dimen>
+
+    <dimen name="social_button_big_model_view_width">24dp</dimen>
 </resources>

@@ -1,6 +1,8 @@
 package com.info_turrim.polandnews.sections.ui.view_model
 
+import android.util.Log
 import androidx.lifecycle.*
+import com.info_turrim.polandnews.ad.AdManager
 import com.info_turrim.polandnews.base.BaseViewModel
 import com.info_turrim.polandnews.news_feed.data.model.FavoriteRequest
 import com.info_turrim.polandnews.news_feed.data.model.GetNewsRequestParam
@@ -15,7 +17,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import com.info_turrim.polandnews.base.Result
+import com.info_turrim.polandnews.news_feed.data.model.GetAdRequestParam
 import com.info_turrim.polandnews.news_feed.domain.use_case.LikeNewsUseCase
+import com.info_turrim.polandnews.sections.domain.use_case.GetAdUseCase
 import javax.inject.Inject
 
 private const val VISIBLE_THRESHOLD = 3
@@ -26,6 +30,7 @@ class SectionDetailsViewModel @Inject constructor(
     private val addToFavoriteUseCase: AddToFavoriteUseCase,
     private val removeFromFavoriteUseCase: RemoveFromFavoriteUseCase,
     private val likeNewsUseCase: LikeNewsUseCase,
+    private val getAdUseCase: GetAdUseCase,
 ) : BaseViewModel() {
 
     @Inject
@@ -95,7 +100,7 @@ class SectionDetailsViewModel @Inject constructor(
     fun listScrolled(
         visibleItemCount: Int,
         lastVisibleItemPosition: Int,
-        totalItemCount: Int
+        totalItemCount: Int,
     ) {
         if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
             _newsParams.value?.let { viewModelScope.launch { newsRepository.requestMore(it) } }
@@ -138,6 +143,21 @@ class SectionDetailsViewModel @Inject constructor(
                         _removeFromFavouriteResult.value = it.result
                     },
                     onFailure = {}
+                )
+            }
+        }
+    }
+
+    fun getAd(param: GetAdRequestParam) {
+        launchUseCase {
+            getAdUseCase.execute(param) {
+                it.fold(
+                    onSuccess = {
+                        AdManager.adList = it.toMutableList()
+                    },
+                    onFailure = {
+                        Log.d("AD", "Ad failure: $it")
+                    }
                 )
             }
         }

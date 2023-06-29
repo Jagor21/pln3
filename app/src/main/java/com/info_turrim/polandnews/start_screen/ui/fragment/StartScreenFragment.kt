@@ -31,7 +31,7 @@ class StartScreenFragment :
         super.onCreate(savedInstanceState)
         val backCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                navController.navigateUp()
+                requireActivity().finish()
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, backCallback)

@@ -1,6 +1,8 @@
 package com.info_turrim.polandnews.news_feed.ui.view_model
 
+import android.util.Log
 import androidx.lifecycle.*
+import com.info_turrim.polandnews.ad.AdManager
 import com.info_turrim.polandnews.base.BaseViewModel
 import com.info_turrim.polandnews.news_feed.data.model.FavoriteRequest
 import com.info_turrim.polandnews.news_feed.data.model.GetForYouNewsRequestParam
@@ -17,6 +19,7 @@ import timber.log.Timber
 import javax.inject.Inject
 import com.info_turrim.polandnews.base.Result
 import com.info_turrim.polandnews.news_feed.data.model.GetAdRequestParam
+import com.info_turrim.polandnews.sections.domain.use_case.GetAdUseCase
 
 private const val VISIBLE_THRESHOLD = 3
 
@@ -25,6 +28,7 @@ class NewsFeedSectionViewModel @Inject constructor(
     private val addToFavoriteUseCase: AddToFavoriteUseCase,
     private val likeNewsUseCase: LikeNewsUseCase,
     private val removeFromFavoriteUseCase: RemoveFromFavoriteUseCase,
+    private val getAdUseCase: GetAdUseCase,
 ) : BaseViewModel() {
 
     @Inject
@@ -148,9 +152,18 @@ class NewsFeedSectionViewModel @Inject constructor(
         }
     }
 
-    fun getAd(getAdRequestParam: GetAdRequestParam) {
+    fun getAd(param: GetAdRequestParam) {
         launchUseCase {
-            newsRepository.getAd(getAdRequestParam)
+            getAdUseCase.execute(param) {
+                it.fold(
+                    onSuccess = {
+                        AdManager.adList = it.toMutableList()
+                    },
+                    onFailure = {
+                        Log.d("AD", "Ad failure: $it")
+                    }
+                )
+            }
         }
     }
 }

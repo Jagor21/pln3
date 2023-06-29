@@ -12,11 +12,11 @@
             android:id="@+id/tb_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/margin_22"
             android:paddingTop="@dimen/margin_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_navigation_back_gray"
             app:title="@string/log_in"
             app:titleTextAppearance="@style/Text_700.SP26.Black"
             app:titleTextColor="@color/black" />

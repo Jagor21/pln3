@@ -22,6 +22,7 @@ import com.info_turrim.polandnews.base.ModelViewEvent.NewsEvent.*
 import com.info_turrim.polandnews.news_feed.data.model.FavoriteRequest
 import com.info_turrim.polandnews.utils.extension.getIsUserReal
 import com.info_turrim.polandnews.utils.extension.openCustomTab
+import com.info_turrim.polandnews.utils.extension.saveStateAndNavigate
 
 class NewsDetailsFragment :
     BaseFragment<FragmentNewsDetailsBinding>(R.layout.fragment_news_details) {
@@ -178,13 +179,15 @@ class NewsDetailsFragment :
                 event as ModelViewEvent.NewsEvent
                 when (event) {
                     is NewsLikeClickEvent -> {
-                        if (prefs.getIsUserLoggedIn()) {
+                        if (prefs.getIsUserReal()) {
                             viewModel.likeNews(event.id)
                         } else {
                             showInformationDialog(
                                 R.string.need_to_be_registered_or_logged_in_like,
                                 R.string.error
-                            )
+                            ) {
+                                navController.navigate(R.id.action_newsDetailsFragment_to_profileGraph)
+                            }
                         }
                     }
                     is CommentsClickEvent -> {
@@ -259,8 +262,10 @@ class NewsDetailsFragment :
 
             news.observe(viewLifecycleOwner) {
                 it.fold(
-                    onSuccess = {
-                        newsDetailsController.newsList = it.toList()
+                    onSuccess = {ns ->
+                        val news = newsDetailsController.newsList.toMutableList()
+                        news.addAll(ns)
+                        newsDetailsController.newsList = news
                     },
                     onFailure = {
                         it as Result.ErrorResult.NetworkErrorResponse

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.info_turrim.polandnews.utils.extension.DateTimeExtKt" />
+
+        <variable
+            name="news"
+            type="com.info_turrim.polandnews.news_feed.domain.model.News" />
+
+        <variable
+            name="onLikeClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onCommentsClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onBookmarkClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onShareClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onNewsClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="onSourceClick"
+            type="View.OnClickListener" />
+
+        <variable
+            name="isUserReal"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/news_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_8"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:background="@drawable/news_card_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_news_image"
+                android:layout_width="0dp"
+                android:layout_height="175dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="@{onNewsClick}"
+                android:scaleType="centerCrop"
+                android:src="@drawable/news_placeholder"
+                android:visibility="visible"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                tools:srcCompat="@drawable/test_placeholder" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/iv_news_image"
+                android:layout_alignEnd="@id/iv_news_image"
+                android:onClick="@{onBookmarkClick}">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/iv_bookmark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:background="@drawable/bg_social_btns_news_details"
+                    android:button="@drawable/bookmark_selector"
+                    android:checked="@{news.isFavourites}"
+                    android:onClick="@{onBookmarkClick}"
+                    tools:checked="true" />
+            </FrameLayout>
+        </RelativeLayout>
+
+        <TextView
+            style="@style/Text_600.SP16.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:onClick="@{onNewsClick}"
+            android:paddingStart="@dimen/margin_20"
+            android:paddingEnd="@dimen/margin_20"
+            android:text="@{news.mHeader}"
+            tools:text="Guinness World Records: Moscow metro builders set a world record" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/source_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:onClick="@{onSourceClick}"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/margin_24">
+
+                <ImageView
+                    android:id="@+id/iv_source"
+                    android:layout_width="@dimen/margin_45"
+                    android:layout_height="@dimen/margin_45"
+                    android:scaleType="fitCenter"
+                    tools:src="@drawable/app_logo" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_12"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_source_name"
+                        style="@style/Text_500.SP14.Black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{news.mSourceTitle}"
+                        tools:text="Dailymail Breaking" />
+
+                    <TextView
+                        android:id="@+id/tv_published_at"
+                        style="@style/Text_500.SP14.Gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{DateTimeExtKt.createTime(news.mCreatedAt)}"
+                        android:visibility="@{news.createdAt == null ? View.GONE : View.VISIBLE}"
+                        tools:text="5 hours ago" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/source_container"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_12"
+                android:layout_marginBottom="@dimen/margin_14"
+                android:gravity="end"
+                android:paddingEnd="@dimen/margin_8">
+
+                <LinearLayout
+                    android:id="@+id/like_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/social_button_big_model_view_width"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:onClick="@{onLikeClick}"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/iv_like"
+                        android:layout_width="@dimen/social_button_big_model_view_width"
+                        android:layout_height="@dimen/social_button_big_model_view_width"
+                        android:checked="@{news.mLikedByUser}"
+                        android:clickable="@{isUserReal}"
+                        android:onClick="@{onLikeClick}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:button="@drawable/like_selector"
+                        tools:checked="false"/>
+
+                    <TextView
+                        android:id="@+id/tv_likes"
+                        style="@style/Text_500.SP14.Black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:includeFontPadding="false"
+                        android:onClick="@{onLikeClick}"
+                        android:text="@{Integer.toString(news.liked)}"
+                        tools:text="23" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/comments_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/social_button_big_model_view_width"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_toEndOf="@+id/like_container"
+                    android:onClick="@{onCommentsClick}"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_comment"
+                        android:layout_width="@dimen/social_button_big_model_view_width"
+                        android:layout_height="@dimen/social_button_big_model_view_width"
+                        android:checked="false"
+                        android:clickable="false"
+                        android:focusable="false"
+                        app:srcCompat="@drawable/ic_comments" />
+
+                    <TextView
+                        android:id="@+id/tv_comments"
+                        style="@style/Text_500.SP14.Black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:includeFontPadding="false"
+                        android:text="@{Integer.toString(news.mCommented)}"
+                        tools:text="23" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_share"
+                    android:layout_width="@dimen/social_button_big_model_view_width"
+                    android:layout_height="@dimen/social_button_big_model_view_width"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:layout_toEndOf="@id/comments_container"
+                    android:onClick="@{onShareClick}"
+                    app:srcCompat="@drawable/ic_share_gray" />
+
+                <!--            <ImageView-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_alignParentTop="true"-->
+                <!--                android:layout_alignParentEnd="true"-->
+                <!--                android:onClick="@{onBookmarkClick}"-->
+                <!--                app:srcCompat="@drawable/ic_bookmark" />-->
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!--        <View-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="3dp"-->
+        <!--            android:background="@color/color_separator" />-->
+    </LinearLayout>
+</layout>

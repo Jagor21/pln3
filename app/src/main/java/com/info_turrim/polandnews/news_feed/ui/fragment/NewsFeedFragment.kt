@@ -2,6 +2,8 @@ package com.info_turrim.polandnews.news_feed.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.info_turrim.polandnews.R
@@ -10,6 +12,7 @@ import com.info_turrim.polandnews.common.model_domain.Category
 import com.info_turrim.polandnews.databinding.FragmentNewsFeedBinding
 import com.info_turrim.polandnews.news_feed.ui.adapter.NewsFeedSectionsAdapter
 import com.info_turrim.polandnews.news_feed.ui.view_model.NewsFeedViewModel
+
 
 private const val CATEGORIES_BUNDLE_KEY = "categories"
 
@@ -69,6 +72,13 @@ class NewsFeedFragment : BaseFragment<FragmentNewsFeedBinding>(R.layout.fragment
                     else -> categories[position].second
                 }
             }.attach()
+//adding margins to the tabs
+            for (i in 0 until tlTabs.tabCount) {
+                val tab = (tlTabs.getChildAt(0) as ViewGroup).getChildAt(i)
+                val p = tab.layoutParams as MarginLayoutParams
+                p.setMargins(0, 0, 10, 0)
+                tab.requestLayout()
+            }
         }
     }
 

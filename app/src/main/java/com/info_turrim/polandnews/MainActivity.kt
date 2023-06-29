@@ -1,8 +1,11 @@
 package com.info_turrim.polandnews
 
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -49,6 +52,14 @@ class MainActivity : DaggerAppCompatActivity() {
     private var currentDestination: Int = -1
     var uuid: String = ""
 
+    private val permissionsList = listOf(
+        android.Manifest.permission.POST_NOTIFICATIONS
+    )
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+        }
+
     private val destinationChangedListener: NavController.OnDestinationChangedListener by lazy {
         NavController.OnDestinationChangedListener { _, destination, args ->
             when (destination.id) {
@@ -58,16 +69,20 @@ class MainActivity : DaggerAppCompatActivity() {
                         binding.bottomNavView.isGone = it.getBoolean("isSectionStart")
                     }
                 }
+
                 R.id.news_feed_fragment -> {
                     binding.bottomNavView.selectedItemId = R.id.news_graph
                     binding.bottomNavView.isGone = false
                 }
+
                 R.id.follow_fragment,
                 R.id.profile_fragment,
                 R.id.source_fragment,
-                R.id.start_auth_fragment -> {
+                R.id.start_auth_fragment,
+                -> {
                     binding.bottomNavView.isGone = false
                 }
+
                 else -> {
                     binding.bottomNavView.isGone = true
                 }
@@ -86,7 +101,7 @@ class MainActivity : DaggerAppCompatActivity() {
 
         navController.addOnDestinationChangedListener(destinationChangedListener)
         binding.bottomNavView.setOnItemSelectedListener {
-            if(it.itemId != currentDestination) {
+            if (it.itemId != currentDestination) {
                 when (it.itemId) {
 //                    currentDestination -> false
                     R.id.news_graph -> {
@@ -94,21 +109,25 @@ class MainActivity : DaggerAppCompatActivity() {
                         navController.navigate(R.id.news_graph)
                         true
                     }
+
                     R.id.sections_graph -> {
                         currentDestination = R.id.sections_graph
                         navController.navigate(R.id.sections_graph)
                         true
                     }
+
                     R.id.follow_graph -> {
                         currentDestination = R.id.follow_graph
                         navController.navigate(R.id.follow_graph)
                         true
                     }
+
                     R.id.profile_graph -> {
                         currentDestination = R.id.profile_graph
                         navController.navigate(R.id.profile_graph)
                         true
                     }
+
                     else -> false
                 }
             } else {
@@ -135,14 +154,9 @@ class MainActivity : DaggerAppCompatActivity() {
             uuid = UUID.randomUUID().toString()
             prefs.setUUID(uuid)
         }
-//        val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
-//        if(needToShowAd){
-//            getAd()
-//        }
 
-//        viewModel.adList.observe(this) {
-//            adList = it
-//        }
+        requestPermission(permissionsList)
+
     }
 
 //    fun getAd() {
@@ -161,6 +175,22 @@ class MainActivity : DaggerAppCompatActivity() {
         val configuration = resources.configuration
         configuration.setLocale(locale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
+    }
+
+    private fun requestPermission(permissionsList: List<String>) {
+        val newPermissions = mutableListOf<String>()
+        permissionsList.forEach { permission ->
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    permission
+                ) == PackageManager.PERMISSION_DENIED
+            ) {
+                newPermissions.add(permission)
+            }
+        }
+        if (newPermissions.isNotEmpty()) {
+            requestPermissionLauncher.launch(newPermissions.toTypedArray())
+        }
     }
 
     override fun onBackPressed() {

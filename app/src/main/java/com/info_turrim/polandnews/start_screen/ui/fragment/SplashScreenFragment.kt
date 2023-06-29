@@ -3,6 +3,8 @@ package com.info_turrim.polandnews.start_screen.ui.fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -31,6 +33,16 @@ class SplashScreenFragment :
         if (account != null) {
 
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val backCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, backCallback)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

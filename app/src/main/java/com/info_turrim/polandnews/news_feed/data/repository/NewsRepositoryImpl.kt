@@ -5,6 +5,7 @@ import android.util.Log
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.info_turrim.polandnews.MainActivity
+import com.info_turrim.polandnews.ad.AdManager
 import com.info_turrim.polandnews.common.toListMapper
 import com.info_turrim.polandnews.news_feed.data.model.FavoriteRequest
 import com.info_turrim.polandnews.news_feed.data.model.GetForYouNewsRequestParam
@@ -118,7 +119,7 @@ class NewsRepositoryImpl @Inject constructor(
                 newsDataSource.getNews(getNewsRequestParam.copy(page = lastRequestedPage))
             val news = newsToDomainMapper.toListMapper().map(response).toMutableList()
             val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
-            val ads = adList
+            val ads = AdManager.adList
             if (needToShowAd && ads.isNotEmpty()) {
                 val newsCount = news.size / 5
                 var insertAdIndex = 5
@@ -169,7 +170,7 @@ class NewsRepositoryImpl @Inject constructor(
             val news = newsToDomainMapper.toListMapper().map(response).toMutableList()
             if (news.isNotEmpty()) {
                 val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
-                val ads = adList
+                val ads = AdManager.adList
                 if (needToShowAd && ads.isNotEmpty()) {
                     val newsCount = news.size / 5
                     var insertAdIndex = 5
@@ -218,7 +219,11 @@ class NewsRepositoryImpl @Inject constructor(
         return successful
     }
 
-    override suspend fun getAd(getAdRequestParam: GetAdRequestParam)/*: Result<List<News>>*/ {
-        adList = newsDataSource.getAd(getAdRequestParam)
+    override suspend fun getAd(getAdRequestParam: GetAdRequestParam): Result<List<News>> {
+//        val needToShowAd = Firebase.remoteConfig.getBoolean("show_content")
+//        if (needToShowAd) {
+//            adList = newsDataSource.getAd(getAdRequestParam)
+        return newsDataSource.getAd(getAdRequestParam)
+//        }
     }
 }

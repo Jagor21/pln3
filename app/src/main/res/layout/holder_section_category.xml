@@ -40,6 +40,7 @@
             android:background="@drawable/ic_section_category_bck"
             android:paddingTop="@dimen/margin_12"
             android:paddingBottom="@dimen/margin_12"
+            app:layout_constraintEnd_toEndOf="parent"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,18 +50,16 @@
         <TextView
             android:id="@+id/tv_category_title"
             style="@style/Text_600.SP16.Black"
-            android:layout_width="0dp"
-            android:textAlignment="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_14"
-            android:layout_marginEnd="@dimen/margin_10"
             android:maxLines="2"
             android:text="@{category.title}"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/iv_category"
-            app:layout_constraintStart_toStartOf="@id/iv_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_category"
-            tools:text="Poland Poland Poland" />
+            tools:text="PolandPoland" />
 
         <TextView
             android:id="@+id/tv_category_description"
@@ -79,8 +78,8 @@
             android:id="@+id/btn_subscribe"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginTop="@dimen/margin_10"
             android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_10"
             android:background="@drawable/category_subscribe_button_state"
             android:checked="@{category.followedByUser}"
             android:onClick="@{onSubscribeClick}"

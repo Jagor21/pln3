@@ -14,7 +14,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.info_turrim.polandnews.base.Result
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
@@ -45,8 +48,8 @@ class SplashScreenViewModel @Inject constructor(
     val needOpenFeed: LiveData<Boolean>
         get() = _needOpenFeed
 
-    private val _needOpenStart = MutableStateFlow<Boolean>(false)
-    val needOpenStart = _needOpenStart.asStateFlow()
+    private val _needOpenStart = MutableSharedFlow<Boolean>(1, onBufferOverflow = BufferOverflow.DROP_LATEST)
+    val needOpenStart = _needOpenStart.asSharedFlow()
 
     private val _profileData = MutableLiveData<SignUpProfile>()
     val profileData: LiveData<SignUpProfile>
@@ -106,7 +109,7 @@ class SplashScreenViewModel @Inject constructor(
             } else {
                 updateProgress()
                 if(prefs.isTermsPolicyAccepted()) {
-                    _needOpenStart.update { true }
+                    _needOpenStart.tryEmit(true)
                 } else {
                     _needOpenTerms.value = true
                 }

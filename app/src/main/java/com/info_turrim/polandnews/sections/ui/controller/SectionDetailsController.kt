@@ -24,7 +24,7 @@ class SectionDetailsController : EpoxyController() {
                 id("news_${news.id}")
                 news(news)
                 onLikeClick(View.OnClickListener {
-//                    if (isUserReal) {
+                    if (isUserReal) {
                         val newsList = sectionNewsList.toMutableList()
                         val newsToUpdate = newsList.find { it.id == news.id }
                         val newsIndex = newsList.indexOf(news)
@@ -39,7 +39,7 @@ class SectionDetailsController : EpoxyController() {
                             newsList.add(newsIndex, updatedNews)
                             this@SectionDetailsController.sectionNewsList = newsList
                         }
-//                    }
+                    }
                     listener(ModelViewEvent.NewsEvent.NewsLikeClickEvent(news.id))
                 })
                 onCommentsClick(View.OnClickListener {

@@ -18,9 +18,12 @@ import com.info_turrim.polandnews.sections.ui.controller.SectionDetailsControlle
 import com.info_turrim.polandnews.sections.ui.view_model.SectionDetailsViewModel
 import timber.log.Timber
 import com.info_turrim.polandnews.base.Result
+import com.info_turrim.polandnews.news_feed.data.model.GetAdRequestParam
 import com.info_turrim.polandnews.news_feed.domain.model.News
 import com.info_turrim.polandnews.utils.extension.getIsUserReal
+import com.info_turrim.polandnews.utils.extension.getUUID
 import com.info_turrim.polandnews.utils.extension.saveStateAndNavigate
+import com.info_turrim.polandnews.utils.extension.setUUID
 
 class SectionDetailsFragment :
     BaseFragment<FragmentSectionDetailsBinding>(R.layout.fragment_section_details) {
@@ -50,12 +53,24 @@ class SectionDetailsFragment :
                 binding.rvSectionNews.scrollToPosition(currentSectionNewsPosition)
             }, 500L)
         }
+        var uuid = prefs.getUUID()
+        if (uuid.isEmpty()) {
+            uuid = java.util.UUID.randomUUID().toString()
+            prefs.setUUID(uuid)
+        }
+        viewModel.getAd(
+            GetAdRequestParam(
+                uuid = uuid,
+                adsQuantity = 10
+            )
+        )
     }
 
     private fun initController() {
         sectionDetailsController = SectionDetailsController()
         sectionDetailsController.listener = ::onEventClick
         binding.rvSectionNews.setController(sectionDetailsController)
+        sectionDetailsController.isUserReal = prefs.getIsUserReal()
     }
 
 
@@ -68,9 +83,12 @@ class SectionDetailsFragment :
                     showInformationDialog(
                         R.string.need_to_be_registered_or_logged_in_like,
                         R.string.error
-                    )
+                    ) {
+                        navController.navigate(R.id.action_sectionsDetailsFragment_to_profileGraph)
+                    }
                 }
             }
+
             is ModelViewEvent.NewsEvent.CommentsClickEvent -> {
                 navController.saveStateAndNavigate(
                     R.id.action_sectionNewsDetailsFragment_to_newsCommentsFragment,
@@ -83,6 +101,7 @@ class SectionDetailsFragment :
 //                    bundleOf("newsId" to event.id, "commentsAmount" to event.commentsAmount)
 //                )
             }
+
             is ModelViewEvent.NewsEvent.ShareClickEvent -> {
                 val shareIntent = Intent(Intent.ACTION_SEND).also {
                     it.type = "text/plain"
@@ -97,6 +116,7 @@ class SectionDetailsFragment :
 
                 viewModel.onShareNews(event.id)
             }
+
             is ModelViewEvent.NewsEvent.AddToFavouritesClickEvent -> {
                 if (prefs.getIsUserReal()) {
                     viewModel.addToFavorite(FavoriteRequest(event.newsId))
@@ -109,9 +129,11 @@ class SectionDetailsFragment :
                     }
                 }
             }
+
             is ModelViewEvent.NewsEvent.RemoveFromFavouritesClickEvent -> {
                 viewModel.removeFromFavourite(event.id)
             }
+
             is ModelViewEvent.NewsEvent.NewsClickEvent -> {
                 navController.saveStateAndNavigate(
                     R.id.action_sectionDetailsFragment_to_newsDetailsFragment,
@@ -129,10 +151,11 @@ class SectionDetailsFragment :
                 navController.saveStateAndNavigate(
                     R.id.action_sectionDetailsFragment_to_sourceFragment,
                     bundleOf("sourceId" to event.sourceId)
-                ){
+                ) {
                     currentSectionNewsPosition = event.position
                 }
             }
+
             else -> {}
         }
     }
@@ -141,7 +164,9 @@ class SectionDetailsFragment :
         viewModel.news.observe(viewLifecycleOwner) {
             it.fold(
                 onSuccess = {
-                    currentSectionNewsList = it.toList()
+                    val news = sectionDetailsController.sectionNewsList.toMutableList()
+                    news.addAll(it)
+                    currentSectionNewsList = news
                     sectionDetailsController.sectionNewsList = currentSectionNewsList
                 },
                 onFailure = {

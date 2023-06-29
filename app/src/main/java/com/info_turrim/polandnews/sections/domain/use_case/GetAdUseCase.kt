@@ -1,4 +1,4 @@
-package com.info_turrim.polandnews.news_feed.domain.use_case
+package com.info_turrim.polandnews.sections.domain.use_case
 
 import com.info_turrim.polandnews.base.BaseUseCase
 import com.info_turrim.polandnews.base.Result
@@ -9,9 +9,9 @@ import javax.inject.Inject
 
 class GetAdUseCase @Inject constructor(
     private val newsRepository: NewsRepository
-)/* : BaseUseCase<GetAdRequestParam, Unit>() {
+) : BaseUseCase<GetAdRequestParam, List<News>>() {
 
-    override suspend fun run(param: GetAdRequestParam): Result<Unit> {
+    override suspend fun run(param: GetAdRequestParam): Result<List<News>> {
         return newsRepository.getAd(param)
     }
-}*/
+}

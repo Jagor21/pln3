@@ -18,5 +18,5 @@ interface NewsRepository {
     suspend fun getForYouNews(getForYouNewsRequestParam: GetForYouNewsRequestParam): Flow<Result<Set<News>>>
     suspend fun requestMoreForYou(getForYouNewsRequestParam: GetForYouNewsRequestParam)
     suspend fun removeFromFavourites(id: Int): Result<AddToFavourite>
-    suspend fun getAd(getAdRequestParam: GetAdRequestParam)/*: Result<List<News>>*/
+    suspend fun getAd(getAdRequestParam: GetAdRequestParam): Result<List<News>>
 }

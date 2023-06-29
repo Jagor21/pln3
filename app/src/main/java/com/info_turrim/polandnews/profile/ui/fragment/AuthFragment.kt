@@ -33,7 +33,15 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(R.layout.fragment_auth) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewPager()
-        chooseTab()
+        bindViews()
+    }
+
+    private fun bindViews() {
+        with(binding) {
+            tbProfile.setNavigationOnClickListener {
+                navController.navigateUp()
+            }
+        }
     }
 
     private fun setupViewPager() {
@@ -47,18 +55,26 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(R.layout.fragment_auth) {
                     else -> getString(R.string.sign_up)
                 }
             }.attach()
+            chooseTab()
         }
     }
 
     private fun chooseTab() {
 //        binding.tlAuth.setScrollPosition(if (args.isSignIn) 0 else 1, 0f, true)
-        binding.vpAuthContent.currentItem = if (args.isSignIn) 0 else 1
-        if (args.isSignIn) {
-            binding.tlAuth.selectTab(binding.tlAuth.getTabAt(0))
-            binding.vpAuthContent.currentItem = 0
-        } else {
-            binding.tlAuth.selectTab(binding.tlAuth.getTabAt(1))
-        binding.vpAuthContent.currentItem = 1
+//        binding.vpAuthContent.currentItem = if (args.isSignIn) 0 else 1
+        with(binding) {
+
+            tlAuth.postDelayed({
+                val tab = tlAuth.getTabAt(if (args.isSignIn) 0 else 1)
+                tab?.select()
+            }, 500L)
         }
+//        if (args.isSignIn) {
+//            binding.tlAuth.selectTab(binding.tlAuth.getTabAt(0))
+//            binding.vpAuthContent.currentItem = 0
+//        } else {
+//            binding.tlAuth.selectTab(binding.tlAuth.getTabAt(1))
+//        binding.vpAuthContent.currentItem = 1
+//        }
     }
 }
