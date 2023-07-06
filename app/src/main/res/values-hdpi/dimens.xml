@@ -10,7 +10,7 @@
     <dimen name="bookmark_icon_bg_padding_start_12">10dp</dimen>
     <dimen name="margin_14">10dp</dimen>
     <dimen name="margin_16">5dp</dimen>
-    <dimen name="checkbox_margin_news_big">10dp</dimen>
+    <dimen name="checkbox_margin_news_big">14dp</dimen>
     <dimen name="margin_18">18dp</dimen>
     <dimen name="margin_22">22dp</dimen>
     <dimen name="margin_24">14dp</dimen>
