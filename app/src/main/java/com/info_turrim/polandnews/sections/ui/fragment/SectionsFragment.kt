@@ -2,6 +2,7 @@ package com.info_turrim.polandnews.sections.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -15,7 +16,8 @@ import com.info_turrim.polandnews.databinding.FragmentSectionsBinding
 import com.info_turrim.polandnews.sections.ui.view_model.SectionsViewModel
 import com.info_turrim.polandnews.sections.ui.controller.SectionsController
 import com.info_turrim.polandnews.utils.extension.EMPTY
-
+private const val CATEGORY_ADDED_MSG = "Category added."
+private const val CATEGORY_REMOVED_MSG = "Category removed."
 class SectionsFragment : BaseFragment<FragmentSectionsBinding>(R.layout.fragment_sections) {
 
     private lateinit var sectionsController: SectionsController
@@ -42,10 +44,17 @@ class SectionsFragment : BaseFragment<FragmentSectionsBinding>(R.layout.fragment
             categories.observe(viewLifecycleOwner, Observer {
                 sectionsController.categoryList = it
             })
-            subscriptionResult.observe(viewLifecycleOwner, Observer { subscritptionResult ->
+            subscriptionResult.observe(viewLifecycleOwner, Observer { subscriptionResult ->
                 sectionsController.categoryList = sectionsController.categoryList.map {
-                    if (it.id == subscritptionResult.first) {
-                        it.copy(followedByUser = subscritptionResult.second != String.EMPTY)
+                    if (it.id == subscriptionResult.first) {
+                        Toast.makeText(requireContext(), getString(
+                            if(subscriptionResult.second == CATEGORY_ADDED_MSG) {
+                                R.string.section_added
+                            } else {
+                                R.string.section_removed
+                            }
+                        ), Toast.LENGTH_SHORT).show()
+                        it.copy(followedByUser = subscriptionResult.second != String.EMPTY)
                     } else {
                         it
                     }

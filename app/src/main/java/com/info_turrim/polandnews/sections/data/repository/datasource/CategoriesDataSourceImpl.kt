@@ -25,7 +25,9 @@ class CategoriesDataSourceImpl @Inject constructor(
     override suspend fun subscribeForCategory(id: Int): Result<CategoryFollow> {
         return execute {
             val result = categoryApi.subscribeForCategory(id).bodyOrError()
-            result.mapTo<CategoryFollow>()
+            CategoryFollow(
+                results = result.results
+            )
         }
     }
 }

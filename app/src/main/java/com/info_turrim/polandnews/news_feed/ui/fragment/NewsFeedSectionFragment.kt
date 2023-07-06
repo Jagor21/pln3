@@ -10,7 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -265,11 +264,11 @@ class NewsFeedSectionFragment :
 
                     if (item.isAd) {
                         if (!item.wasConfirmed) {
-                            val url = if (!item.confirmUrl.contains("https")) {
+                            val url = item.confirmUrl/*if (!item.confirmUrl.contains("https")) {
                                 "https:${item.confirmUrl}"
                             } else {
                                 item.confirmUrl
-                            }
+                            }*/
                             if (isAdConfirmRequestFinished) {
                                 isAdConfirmRequestFinished = false
                                 Log.d(

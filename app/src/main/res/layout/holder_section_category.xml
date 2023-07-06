@@ -26,7 +26,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/parent_container"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_14"
         android:layout_marginTop="@dimen/margin_14"
@@ -40,9 +40,9 @@
             android:background="@drawable/ic_section_category_bck"
             android:paddingTop="@dimen/margin_12"
             android:paddingBottom="@dimen/margin_12"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_category_title"
             android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_category_title"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/ic_section_category_breaking_news" />
 
@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_category"
-            tools:text="PolandPoland" />
+            tools:text="Breaking News" />
 
         <TextView
             android:id="@+id/tv_category_description"
@@ -76,8 +76,8 @@
 
         <ToggleButton
             android:id="@+id/btn_subscribe"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/section_checkbox_width"
+            android:layout_height="@dimen/section_checkbox_width"
             android:layout_marginStart="@dimen/margin_10"
             android:layout_marginTop="@dimen/margin_10"
             android:background="@drawable/category_subscribe_button_state"

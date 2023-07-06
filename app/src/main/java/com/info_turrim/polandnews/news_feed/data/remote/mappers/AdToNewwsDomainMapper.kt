@@ -19,7 +19,11 @@ class AdToNewsDomainMapper @Inject constructor(): Mapper<AdResponse, News> {
                 commented = Random.nextInt(7, 100),
                 createdAt = createFakeNewsDate(),
                 header = from.title,
-                image = from.mediaUrl,
+                image = if (!from.mediaUrl.contains("https")) {
+                    "https:${from.mediaUrl}"
+                } else {
+                    from.mediaUrl
+                },
                 liked = Random.nextInt(23, 87),
                 likedByUser = false,
                 shared = Random.nextInt(13, 67),
@@ -41,7 +45,11 @@ class AdToNewsDomainMapper @Inject constructor(): Mapper<AdResponse, News> {
                 likeCount = Random.nextInt(7, 100),
                 isFavourites = false,
                 sourceUniqueId = "",
-                confirmUrl = from.confirmUrl
+                confirmUrl = if (!from.confirmUrl.contains("https")) {
+                    "https:${from.confirmUrl}"
+                } else {
+                    from.confirmUrl
+                }
             )
         }
     }

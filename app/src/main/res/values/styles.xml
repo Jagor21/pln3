@@ -226,7 +226,7 @@
 
     <style name="NavigationTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textColor">@color/gray</item>
-        <item name="android:textSize">@dimen/text_14</item>
+        <item name="android:textSize">@dimen/tab_text_profile</item>
         <item name="textAllCaps">false</item>
         <item name="fontFamily">@font/poppins_500</item>
     </style>
@@ -304,7 +304,7 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+    <style name="ShapeAppearanceOverlay.App.CornerSize8Percent" parent="">
         <item name="cornerSizeTopLeft">8%</item>
         <item name="cornerSizeTopRight">8%</item>
     </style>

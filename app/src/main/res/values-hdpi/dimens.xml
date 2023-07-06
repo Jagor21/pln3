@@ -4,10 +4,13 @@
     <!--margins-->
     <dimen name="margin_7">7dp</dimen>
     <dimen name="margin_8">8dp</dimen>
-    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_10">8dp</dimen>
     <dimen name="margin_12">8dp</dimen>
-    <dimen name="margin_14">14dp</dimen>
+    <dimen name="bookmark_icon_bg_padding_top_12">6dp</dimen>
+    <dimen name="bookmark_icon_bg_padding_start_12">10dp</dimen>
+    <dimen name="margin_14">10dp</dimen>
     <dimen name="margin_16">5dp</dimen>
+    <dimen name="checkbox_margin_news_big">10dp</dimen>
     <dimen name="margin_18">18dp</dimen>
     <dimen name="margin_22">22dp</dimen>
     <dimen name="margin_24">14dp</dimen>
@@ -15,24 +18,33 @@
     <dimen name="margin_40">40dp</dimen>
     <dimen name="margin_42">42dp</dimen>
     <dimen name="margin_45">35dp</dimen>
-    <dimen name="margin_50">50dp</dimen>
+    <dimen name="margin_50">30dp</dimen>
     <dimen name="margin_60">60dp</dimen>
     <dimen name="margin_80">80dp</dimen>
     <dimen name="margin_84">84dp</dimen>
-    <dimen name="margin_100">100dp</dimen>
+    <dimen name="margin_100">70dp</dimen>
     <dimen name="margin_150">150dp</dimen>
     <dimen name="margin_160">160dp</dimen>
     <dimen name="margin_200">200dp</dimen>
+    <dimen name="margin_250">150dp</dimen>
+    <dimen name="splash_logo_width_150">75dp</dimen>
+    <dimen name="nav_icon_back_news_details_width">34dp</dimen>
+    <dimen name="logo_start_screen_width">70dp</dimen>
+    <dimen name="section_checkbox_width">15dp</dimen>
+    <dimen name="section_category_corners">15dp</dimen>
+    <dimen name="news_image_corners">15dp</dimen>
+    <dimen name="unregister_profile_image_width">70dp</dimen>
 
     <!--textSize-->
     <dimen name="text_12">12sp</dimen>
     <dimen name="text_14">10sp</dimen>
-    <dimen name="text_16">14sp</dimen>
-    <dimen name="text_18">18sp</dimen>
-    <dimen name="text_20">20sp</dimen>
+    <dimen name="tab_text_profile">14sp</dimen>
+    <dimen name="text_16">12sp</dimen>
+    <dimen name="text_18">14sp</dimen>
+    <dimen name="text_20">16sp</dimen>
     <dimen name="text_22">22sp</dimen>
-    <dimen name="text_24">24sp</dimen>
-    <dimen name="text_26">26sp</dimen>
+    <dimen name="text_24">18sp</dimen>
+    <dimen name="text_26">20sp</dimen>
 
     <!--radius-->
     <dimen name="radius_5">5dp</dimen>

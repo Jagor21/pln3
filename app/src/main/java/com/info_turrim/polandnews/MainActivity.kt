@@ -3,6 +3,8 @@ package com.info_turrim.polandnews
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -13,23 +15,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.ktx.remoteConfig
-import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.info_turrim.polandnews.common.analytics_event.ReferrerNewsIdEvent
 import com.info_turrim.polandnews.databinding.ActivityMainBinding
 import com.info_turrim.polandnews.network.ConnectivityStateHolder
 import com.info_turrim.polandnews.network.Event
 import com.info_turrim.polandnews.network.NetworkEvents
-import com.info_turrim.polandnews.news_feed.data.model.GetAdRequestParam
 import com.info_turrim.polandnews.news_feed.domain.model.News
 import com.info_turrim.polandnews.utils.extension.getUUID
 import com.info_turrim.polandnews.utils.extension.setUUID
 import dagger.android.support.DaggerAppCompatActivity
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.util.*
+import java.util.Locale
+import java.util.UUID
 import javax.inject.Inject
 
 
@@ -156,7 +154,8 @@ class MainActivity : DaggerAppCompatActivity() {
         }
 
         requestPermission(permissionsList)
-
+        val policy = ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
     }
 
 //    fun getAd() {

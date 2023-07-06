@@ -38,13 +38,23 @@
                 android:id="@+id/tb_news_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
+                    <ImageView
+                        android:id="@+id/iv_icon_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_10"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_navigation_back_gray" />
                     <TextView
                         android:id="@+id/tv_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/poppins_700"
@@ -52,13 +62,14 @@
                         android:text="@{isSectionStart ? @string/sections_title : @string/sections}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_24"
-                        tools:text="fjfjfjf"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintEnd_toStartOf="@id/app_logo"
+                        app:layout_constraintStart_toEndOf="@id/iv_icon_back"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="fjfjfjf fjfjfjf fjfjfjf fjfjfjf fjfjfjf fjfjfjf fjfjfjf fjfjfjf" />
 
                     <TextView
                         android:id="@+id/tv_desc"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/poppins_500"
@@ -66,23 +77,24 @@
                         android:text="@{isSectionStart ? @string/sections_description : @string/breaking_news_desc}"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_16"
+                        android:ellipsize="end"
+                        app:layout_constraintEnd_toEndOf="@id/tv_title"
                         app:layout_constraintStart_toStartOf="@id/tv_title"
                         app:layout_constraintTop_toBottomOf="@id/tv_title"
-                        app:layout_constraintEnd_toEndOf="@id/tv_title"/>
+                        tools:text=" fjfjfjf fjfjfjf fjfjfjf fjfjfjf fjfjfjf fjfjfjf fjfjfjf fjfjfjf" />
 
                     <ImageView
+                        android:id="@+id/app_logo"
                         android:layout_width="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/tv_title"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/margin_8"
                         android:layout_marginEnd="@dimen/margin_16"
-                        app:layout_constraintHorizontal_bias="1"
                         android:src="@drawable/ic_app_logo"
                         app:layout_constraintBottom_toBottomOf="@id/tv_desc"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/tv_title"
-                        app:layout_goneMarginStart="@dimen/margin_8" />
+                        app:layout_constraintHorizontal_bias="1"
+                        app:layout_constraintTop_toTopOf="@id/tv_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.appcompat.widget.Toolbar>
@@ -100,10 +112,9 @@
                 android:layout_above="@id/proceed_btn_container"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 android:layout_alignParentEnd="true"
-                android:paddingStart="@dimen/margin_20"
-                android:paddingEnd="@dimen/margin_20"
+
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:listitem="@layout/holder_section_category" />
 
             <LinearLayout

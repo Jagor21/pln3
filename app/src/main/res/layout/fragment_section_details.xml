@@ -56,12 +56,13 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="@{sectionName}"
+                        android:layout_marginEnd="@dimen/margin_4"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/btn_follow"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@id/iv_icon_back"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="BreakingBreakingBreaking" />
+                        tools:text="Breaking News" />
 
                     <ToggleButton
                         android:id="@+id/btn_follow"

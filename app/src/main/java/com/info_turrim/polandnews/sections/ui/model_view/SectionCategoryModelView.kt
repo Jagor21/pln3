@@ -10,6 +10,7 @@ import com.info_turrim.polandnews.R
 import com.info_turrim.polandnews.common.model_domain.Category
 import com.info_turrim.polandnews.core.GlideApp
 import com.info_turrim.polandnews.databinding.HolderSectionCategoryBinding
+import com.info_turrim.polandnews.utils.extension.loadCategoryImage
 import com.info_turrim.polandnews.utils.extension.loadImage
 
 @SuppressLint("NonConstantResourceId")
@@ -34,8 +35,9 @@ abstract class SectionCategoryModelView : DataBindingEpoxyModel() {
             binding.apply {
                 category = this@SectionCategoryModelView.category
                 categoryIcon = this@SectionCategoryModelView.categoryIcon
-                GlideApp.with(ivCategory).load(this@SectionCategoryModelView.categoryIcon).apply(
-                    RequestOptions.bitmapTransform(GranularRoundedCorners(48f, 48f, 48f, 48f))).into(ivCategory)
+                ivCategory.loadCategoryImage(this@SectionCategoryModelView.categoryIcon)
+//                GlideApp.with(ivCategory).load(this@SectionCategoryModelView.categoryIcon).apply(
+//                    RequestOptions.bitmapTransform(GranularRoundedCorners(48f, 48f, 48f, 48f))).into(ivCategory)
 
                 onCategoryClick = this@SectionCategoryModelView.onCategoryClick
 

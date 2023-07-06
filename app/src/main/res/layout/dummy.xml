@@ -68,7 +68,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/news_placeholder"
                 android:visibility="visible"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize8Percent"
                 tools:srcCompat="@drawable/test_placeholder" />
 
             <FrameLayout

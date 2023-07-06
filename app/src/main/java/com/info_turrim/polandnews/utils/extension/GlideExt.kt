@@ -1,6 +1,7 @@
 package com.info_turrim.polandnews.utils.extension
 
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
@@ -40,8 +41,8 @@ fun loadNewsImage(view: ImageView, url: String) {
 }
 
 fun ImageView.loadImage(url: String, isNewsSourceImage: Boolean) {
-
-    val roundedCorners10 = GranularRoundedCorners(48f, 48f, 0f, 0f)
+    val newsImageCornerRadius = this.context.resources.getDimension(R.dimen.news_image_corners)
+    val roundedCorners10 = GranularRoundedCorners(newsImageCornerRadius, newsImageCornerRadius, 0f, 0f)
     val options10 = RequestOptions.bitmapTransform(roundedCorners10)
 
     val roundedCorners15 = RoundedCorners(15.px)
@@ -63,4 +64,14 @@ fun ImageView.loadImageCoil(url: String, isNewsSourceImage: Boolean) {
         transformations(if (isNewsSourceImage) roundedCorners else roundedCornersTop)
     }
 }
+
+fun ImageView.loadCategoryImage(@DrawableRes iconResId: Int) {
+    val cornerRadius = this.context.resources.getDimension(R.dimen.section_category_corners)
+    val roundedCorners =
+        GranularRoundedCorners(cornerRadius, cornerRadius, cornerRadius, cornerRadius)
+    GlideApp.with(this).load(iconResId).apply(
+        RequestOptions.bitmapTransform(roundedCorners)
+    ).into(this)
+}
+
 

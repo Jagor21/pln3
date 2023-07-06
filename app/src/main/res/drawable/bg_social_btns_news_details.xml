@@ -3,8 +3,8 @@
     android:shape="oval">
     <solid android:color="@color/bg_color_social_btn" />
     <padding
-        android:bottom="@dimen/margin_12"
-        android:left="@dimen/margin_12"
-        android:right="@dimen/margin_12"
-        android:top="@dimen/margin_12" />
+        android:bottom="@dimen/bookmark_icon_bg_padding_top_12"
+        android:left="@dimen/bookmark_icon_bg_padding_start_12"
+        android:right="@dimen/bookmark_icon_bg_padding_start_12"
+        android:top="@dimen/bookmark_icon_bg_padding_top_12" />
 </shape>

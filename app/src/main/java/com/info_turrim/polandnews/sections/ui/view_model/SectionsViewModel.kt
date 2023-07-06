@@ -1,5 +1,6 @@
 package com.info_turrim.polandnews.sections.ui.view_model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.info_turrim.polandnews.base.*
@@ -41,8 +42,8 @@ class SectionsViewModel @Inject constructor(
         launchUseCase {
             subscribeForCategoryUseCase.execute(id) {
                 it.fold(
-                    onSuccess = {
-                        _subscriptionResult.value = id to it.results
+                    onSuccess = { categoryFollow ->
+                        _subscriptionResult.value = id to categoryFollow.results
                     },
                     onFailure = {
                         _subscriptionResult.value = id to String.EMPTY
